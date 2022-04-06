@@ -16,8 +16,7 @@ function Auth() {
     }
  
     return (
-        <div className="auth">       
-        <p> {String(authenticated)}</p>   
+        <div className="auth">         
             <form className="auth-form" onSubmit={handleClick}>
             
               <div className="input-email">

@@ -6,12 +6,12 @@
     text-align: center;
   }
   
-  .game-logo {
+  .logo {
     display: center;
     margin-top: 120px;
   }
   
-  .game-logo img {
+  .logo img {
     width: 300px;
     height: 15%;
     padding: 50px;
