@@ -1,7 +1,6 @@
 import React, { useState, useContext} from "react";
 import { AuthContext} from "../../contexts/auth";
 
-import logo from'./logo.png';
 
 import './auth.css';
 
@@ -13,16 +12,12 @@ function Auth() {
   
     const handleClick = (e) => {
        e.preventDefault()
-    console.log("submit", {email, password});
     login(email, password);
     }
  
     return (
         <div className="auth">       
         <p> {String(authenticated)}</p>   
-          <div className="game-logo">
-            <img src={logo} alt="logo" />
-          </div>
             <form className="auth-form" onSubmit={handleClick}>
             
               <div className="input-email">
