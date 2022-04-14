@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 
-import { AuthContext } from "../../contexts/auth";
+import { AuthContext } from "../../contexts/auth-context";
 
 const Home = () => {
     const { authenticated, logout } = useContext(AuthContext);

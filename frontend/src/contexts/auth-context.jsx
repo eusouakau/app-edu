@@ -1,28 +1,24 @@
 import React, { useState, useEffect, createContext} from 'react';
-
 import { useNavigate } from 'react-router-dom';
-
 import { api, createSession } from '../services/api';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setuser] = useState(null);
+    const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const navigate = useNavigate();
-
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const recoveredUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
 
-        if(recoveredUser && token){
-            setuser(JSON.parse(recoveredUser));
+        if (recoveredUser && token) {
+            setUser(JSON.parse(recoveredUser));
             api.defaults.headers.Authorization = `Bearer ${token}`;
         }
-
-        setLoading(false);
+        setIsLoading(false);
     }, []);
 
     const login = async (email, password) => {
@@ -36,21 +32,21 @@ export const AuthProvider = ({ children }) => {
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
-        setuser(loggedUser);
+        setUser(loggedUser);
         navigate("/");
-        
     };
 
-    const logout = ( ) => {
+    const logout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         api.defaults.headers.Authorization = null;
-        setuser(null);
+        setUser(null);
         navigate("/login");
     };
+
     return (
-    <AuthContext.Provider value={{authenticated: !!user, user, loading, login, logout}}>
-        {children}
-    </AuthContext.Provider>
+        <AuthContext.Provider value={{authenticated: !!user, user, isLoading, login, logout}}>
+            {children}
+        </AuthContext.Provider>
     );
 }
