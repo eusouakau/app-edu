@@ -50,31 +50,3 @@ export const ButtonStyled = styled.button`
     cursor: pointer;
   }
 `;
-
-
-/*
-* {
-    background-color: #222;
-    color: white;
-  }
-  
-  .button2 button{
-      display: center;
-      background-color: #444;
-      color: #ddd;
-      font-weight: 800;
-      margin: 5px;
-      width: 230px;
-      height: 30px;
-      font-size: 12px;
-      border-radius: 10px;
-      padding: 5px;
-      border: none;
-  }
-  
-  .button2 button:hover {
-  background-color: #333;
-  color: #eeeeee;
-  cursor: pointer;
-  }
-*/

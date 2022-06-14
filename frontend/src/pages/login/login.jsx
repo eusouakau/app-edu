@@ -37,6 +37,7 @@ const Login = () => {
                     />
                 </InputContainer>
 
+                <ButtonStyled type="button">Cadastre-se</ButtonStyled>
                 <ButtonStyled type="submit">Entrar</ButtonStyled>
             </form>
         </Container>
