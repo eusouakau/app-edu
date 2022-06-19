@@ -1,9 +1,8 @@
-const mongoose = require('../../db');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 const User = require('./User');
 
 
-const ClassSchema = new mongoose.Schema({
+const SchoolClassSchema = new mongoose.Schema({
     name: { type: String, require: true },
     students: { type: [User], required: false },
     school: { type: String, required: true, },
@@ -11,6 +10,6 @@ const ClassSchema = new mongoose.Schema({
 });
 
 
-const Class = mongoose.model('Class', ClassSchema);
+const SchoolClass = mongoose.model('SchoolClass', SchoolClassSchema);
 
-module.exports = Class;
+module.exports = SchoolClass;
