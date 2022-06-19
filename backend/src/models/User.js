@@ -1,6 +1,6 @@
-const mongoose = require('../../db');
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const Class = require('./Class');
+const Class = require('./SchoolClass');
 
 
 const UserSchema = new mongoose.Schema({
