@@ -1,5 +1,4 @@
-const mongoose = require('../../db');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 const SchoolDiscipline = require('./SchoolDiscipline');
 
 
@@ -7,7 +6,7 @@ const ContentSchema = new mongoose.Schema({
     title: { type: String, require: true },
     description: { type: String, required: true },
     link: { type: String, required: true },
-    SchoolDiscipline: { type: SchoolDiscipline, required: true }
+    schoolDiscipline: { type: SchoolDiscipline, required: true }
 });
 
 
