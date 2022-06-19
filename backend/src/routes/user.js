@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const authConfig = require('../../config/config');
+const authConfig = require('../config.json');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
@@ -69,6 +69,86 @@ router.post('/recuperar-senha', async(req, res) => {
     } catch(err) {
         res.status(400).send({ error: 'Erro ao recuperar senha, tente novamente' });
     }
-})
+});
 
-module.exports = app => app.use('/autenticacao', router);
+router.get('/', async (req, res) => {
+    try{
+        const users = await User.find();
+
+        res.status(200).json(users);
+        
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params.id;
+
+    try{
+        const user = await User.findOne({_id: id});
+
+        if (!user) {
+            return res.status(404).json({error: 'Person not found'});
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.patch('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, email } = req.body;
+
+    const user = {
+        name,
+        email
+    };
+
+    try {
+        updatedUser = await User.findOneAndUpdate({_id: id}, user);
+
+        if (updateUser.mathedCount === 0) {
+            return res.status(404).json({error: 'Usuário não encontrado'});
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params.id;
+    const { name, salary, approved, role } = req.body;
+
+    const user = {
+        name,
+        email,
+        password,
+        role,
+        school,
+        grade,
+       // class
+    };
+
+    if(!user) {
+        return res.status(422).json({error: 'Usuário não encontrado'});
+    }
+
+    try {
+        
+        await User.findOneAndDelete({_id: id});
+
+        res.status(200).json({message: 'Usuário excuído com sucesso'});
+
+    } catch (error) {
+
+        res.status(500).json({error: error.message});
+    }
+
+});
+
+module.exports = router;
