@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const TitleStyled = styled.h1``;
+export const TitleStyled = styled.h1`
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -13,8 +14,6 @@ export const Container = styled.div`
 
   form {
     width: 250px;
-    display: flex;
-    flex-direction: column;
   }
 `;
 
@@ -44,33 +43,13 @@ export const ButtonStyled = styled.button`
   border: none;
   background: var(--cinza);
 
-  color: var(--branco);
+  color: #ddd;
   font-weight: 800;
   font-size: 12px;
-
+  
   :hover {
-    background: var(--preto);
-    cursor: pointer;
-  }
-`;
-
-export const LinkStyled = styled.button`
-  width: 50%;
-  height: 20px;
-  margin-top: 20px;
-
-  border-radius: 10px;
-  border: none;
-  background: none;
-
-  color: var(--azul);
-  font-weight: 800;
-  font-size: 12px;
-
-  align-self: center;
-
-  :hover {
-    background: var(--azul-claro);
+    background: #333;
+    color: #eeeeee;
     cursor: pointer;
   }
 `;

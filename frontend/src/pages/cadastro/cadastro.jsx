@@ -1,13 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import Input from "../../components/ui/input/input";
+import { ButtonStyled, Container, InputContainer, TitleStyled } from "./style";
 
 const Cadastro = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const handleClick = e => {
+  }
+
   return (
-    <Container>         
+    <Container>
+      <TitleStyled>AppEdu - Nome Escola</TitleStyled>                  
       <form onSubmit={handleClick}>
           <InputContainer>
               <Input
@@ -39,7 +45,7 @@ const Cadastro = () => {
               />
           </InputContainer>
 
-          <ButtonStyled type="submit">Entrar</ButtonStyled>
+          <ButtonStyled type="submit">Cadastrar</ButtonStyled>
       </form>
     </Container>
   )
