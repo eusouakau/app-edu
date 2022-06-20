@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-const Content = require('./Content');
 
 
 const SchoolDisciplineSchema = new mongoose.Schema({
     name: { type: String, require: true },
     area: {  type: String, required: true },
-    content: { type: Content, required: false}
 });
 
 
