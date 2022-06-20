@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const SchoolClass = require('./SchoolClass');
+//const SchoolClass = require('./SchoolClass');
 
 
 const UserSchema = new mongoose.Schema({
@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     role: { type: String, required: true, enum: ['teacher', 'student']},
     school: { type: String, required: false },
     grade: { type: String, required: false },
-    schoolClass: { type: SchoolClass, required: false },
+    schoolClass: { type: String, required: false },
     createdAt: { type: Date, default: Date.now  },
     passwordResetToken: { type: String, select: false },
     passwordResetExpires: { type: Date, select: false }
