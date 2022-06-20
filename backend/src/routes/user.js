@@ -17,15 +17,15 @@ router.post('/cadastrar', async (req, res) => {
 
     try {
         if(await User.findOne({ email })) 
-            return res.send(400).send({ error: 'Email já cadastrado!'});
+            return res.status(400).json({ error: 'Email já cadastrado!'});
 
         const user = await User.create(req.body);
 
         user.password = undefined;
 
-        return res.send(201)({ user, token: generateToken({ id: user.id }), message: 'Usuário criado com sucesso!' });
+        return res.status(201).json({ user, token: generateToken({ id: user.id }), message: 'Usuário criado com sucesso!' });
     } catch (err) {
-        return res.status(400).send({ error: 'Falha aoa cadastrar' });
+        return res.status(400).json({ error: 'Falha ao cadastrar' });
     }
 });
 
@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
 
     const token = generateToken({ id: user.id });
 
-    res.send({ user, token });
+    res.json({ user, token });
 });
 
 router.post('/recuperar-senha', async(req, res) => {
@@ -92,7 +92,7 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
-        res.status(200).json(user);
+        res.status(200).json(user, token);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
