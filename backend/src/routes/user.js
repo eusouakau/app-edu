@@ -12,7 +12,7 @@ function generateToken(params = {}) {
     return jwt.sign(params, authConfig.secret, { expiresIn: 86400 });
 }
 
-router.post('/cadastro', async (req, res) => {
+router.post('/cadastrar', async (req, res) => {
     const { email } = req.body;
 
     try {
@@ -23,7 +23,7 @@ router.post('/cadastro', async (req, res) => {
 
         user.password = undefined;
 
-        return res.send({ user, token: generateToken({ id: user.id }) });
+        return res.send(201)({ user, token: generateToken({ id: user.id }), message: 'Usuário criado com sucesso!' });
     } catch (err) {
         return res.status(400).send({ error: 'Falha aoa cadastrar' });
     }
@@ -89,7 +89,7 @@ router.get('/:id', async (req, res) => {
         const user = await User.findOne({_id: id});
 
         if (!user) {
-            return res.status(404).json({error: 'Person not found'});
+            return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
         res.status(200).json(user);
@@ -122,16 +122,16 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params.id;
-    const { name, salary, approved, role } = req.body;
+    const { name, email, password } = req.body;
 
     const user = {
         name,
         email,
-        password,
-        role,
-        school,
-        grade,
-       // class
+        password
+        // role,
+        // school,
+        // grade,
+        // class
     };
 
     if(!user) {
