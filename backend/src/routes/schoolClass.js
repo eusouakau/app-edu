@@ -4,9 +4,9 @@ const SchoolClass = require('../models/SchoolClass');
 
 
 router.post('/', async (req, res) => {
-    const { name, students, school, grade} = req.body;
+    const { name, school, grade} = req.body;
 
-    if (!name || !students || !school || !grade) {
+    if (!name || !school || !grade) {
         res.status(422).json({
             error: 'Dados incompletos'
         });
@@ -15,14 +15,14 @@ router.post('/', async (req, res) => {
 
     const schoolClass = {
         name,
-        students, 
+        //students, 
         school, 
         grade
     }
 
     try {
 
-        await schoolClass.create(schoolClass);
+        await SchoolClass.create(schoolClass);
 
         res.status(201).json({message: 'Turma criada com sucesso!'});
 
