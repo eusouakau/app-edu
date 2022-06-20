@@ -4,9 +4,9 @@ const SchoolDiscipline = require('../models/SchoolDiscipline');
 
 
 router.post('/', async (req, res) => {
-    const { name, area, content } = req.body;
+    const { name, area } = req.body;
 
-    if (!name || !area || !content || !schoolDiscipline) {
+    if (!name || !area ) {
         res.status(422).json({
             error: 'Dados incompletos'
         });
@@ -15,15 +15,14 @@ router.post('/', async (req, res) => {
 
     const schoolDiscipline = {
         name,
-        area, 
-        content
+        area
     }
 
     try {
 
-        await schoolDiscipline.create(schoolDiscipline);
+        await SchoolDiscipline.create(schoolDiscipline);
 
-        res.status(201).json({message: 'Turma criada com sucesso!'});
+        res.status(201).json({message: 'Disciplina criada com sucesso!'});
 
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -48,7 +47,7 @@ router.get('/:id', async (req, res) => {
         const schoolDiscipline = await SchoolDiscipline.findOne({_id: id});
 
         if (!schoolDiscipline) {
-            return res.status(404).json({error: 'Turma não encontrada'});
+            return res.status(404).json({error: 'Disciplina não encontrada'});
         }
 
         res.status(200).json(schoolDiscipline);
@@ -70,7 +69,7 @@ router.patch('/:id', async (req, res) => {
         updatedSchoolDiscipline = await SchoolDiscipline.findOneAndUpdate({_id: id}, schoolDiscipline);
 
         if (updateSchoolDiscipline.mathedCount === 0) {
-            return res.status(404).json({error: 'Turma não encontrada'});
+            return res.status(404).json({error: 'Disciplina não encontrada'});
         }
 
         res.status(200).json(schoolDiscipline);
@@ -91,14 +90,14 @@ router.delete('/:id', async (req, res) => {
     };
 
     if(!schoolDiscipline) {
-        return res.status(422).json({error: 'Turma não encontrada'});
+        return res.status(422).json({error: 'Disciplina não encontrada'});
     }
 
     try {
         
         await SchoolDiscipline.findOneAndDelete({_id: id});
 
-        res.status(200).json({message: 'Turma deletada com sucesso!'});
+        res.status(200).json({message: 'Disciplina deletada com sucesso!'});
 
     } catch (error) {
         res.status(500).json({error: error.message});

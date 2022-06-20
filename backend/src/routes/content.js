@@ -22,9 +22,9 @@ router.post('/', async (req, res) => {
 
     try {
 
-        await content.create(content);
+        await Content.create(content);
 
-        res.status(201).json({message: 'Turma criada com sucesso!'});
+        res.status(201).json({message: 'Conteúdo criado com sucesso!'});
 
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
         const content = await Content.findOne({_id: id});
 
         if (!content) {
-            return res.status(404).json({error: 'Turma não encontrada'});
+            return res.status(404).json({error: 'Conteúdo não encontrado'});
         }
 
         res.status(200).json(content);
@@ -60,19 +60,18 @@ router.get('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
     const { id } = req.params.id;
-    const { title, description, schoolDiscipline } = req.body;
+    const { title, description } = req.body;
 
     const content = {
         title,
-        description, 
-        schoolDiscipline
+        description
     };
 
     try {
         updatedContent = await Content.findOneAndUpdate({_id: id}, content);
 
         if (updateContent.mathedCount === 0) {
-            return res.status(404).json({error: 'Turma não encontrada'});
+            return res.status(404).json({error: 'Conteúdo não encontrado'});
         }
 
         res.status(200).json(content);
@@ -93,14 +92,14 @@ router.delete('/:id', async (req, res) => {
     };
 
     if(!content) {
-        return res.status(422).json({error: 'Turma não encontrada'});
+        return res.status(422).json({error: 'Conteúdo não encontrado'});
     }
 
     try {
         
         await Content.findOneAndDelete({_id: id});
 
-        res.status(200).json({message: 'Turma deletada com sucesso!'});
+        res.status(200).json({message: 'Conteúdo deletado com sucesso!'});
 
     } catch (error) {
         res.status(500).json({error: error.message});
