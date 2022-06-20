@@ -1,7 +1,7 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import Input from "../../components/ui/input/input";
 import { AuthContext } from "../../contexts/auth-context";
-import { ButtonStyled, Container, InputContainer } from "./style";
+import { ButtonStyled, Container, InputContainer, LinkStyled, TitleStyled } from "./style";
 
 const Login = () => {
     const { authenticated, login } = useContext(AuthContext);
@@ -15,7 +15,8 @@ const Login = () => {
     }
  
     return (
-        <Container>         
+        <Container>
+            <TitleStyled>AppEdu - Nome Escola</TitleStyled>         
             <form onSubmit={handleClick}>
                 <InputContainer>
                     <Input
@@ -37,8 +38,9 @@ const Login = () => {
                     />
                 </InputContainer>
 
-                <ButtonStyled type="button">Cadastre-se</ButtonStyled>
                 <ButtonStyled type="submit">Entrar</ButtonStyled>
+                <ButtonStyled type="button">Cadastre-se</ButtonStyled>
+                <LinkStyled type="button">Esqueci a senha</LinkStyled>
             </form>
         </Container>
     )

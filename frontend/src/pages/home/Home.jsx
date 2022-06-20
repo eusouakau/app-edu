@@ -1,6 +1,9 @@
 import React, { Fragment, useContext } from "react";
+import Header from "../../components/header/header";
+import DisciplinaContainer from '../../components/disciplina-container/disciplina-container'
 
 import { AuthContext } from "../../contexts/auth-context";
+import { ContentContainer } from "./style";
 
 const Home = () => {
     const { authenticated, logout } = useContext(AuthContext);
@@ -11,9 +14,21 @@ const Home = () => {
 
     return (
         <Fragment>
-            <h1>Página inicial</h1>
-            <p>{String(authenticated)}</p>
-            <button onClick={handleLogout}>Logout</button>
+            <Header titulo="Disciplinas"/>
+            <ContentContainer>
+              <div className="row">
+                <DisciplinaContainer nomeDisciplina="Matematica" />
+                <DisciplinaContainer nomeDisciplina="Matematica" />
+              </div>
+              <div className="row">
+                <DisciplinaContainer nomeDisciplina="Matematica" />
+                <DisciplinaContainer nomeDisciplina="Matematica" />
+              </div>
+              <div className="row">
+                <DisciplinaContainer nomeDisciplina="Matematica" />
+                <DisciplinaContainer nomeDisciplina="Matematica" />
+              </div>
+            </ContentContainer>
         </Fragment>
     );
 };

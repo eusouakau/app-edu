@@ -3,8 +3,11 @@ import React, { useContext } from 'react'
 import { BrowserRouter as Router , Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from '../contexts/auth-context';
 
-import Home from '../pages/home/Home';
+import Home from '../pages/home/home';
 import Login from '../pages/login/login';
+import Cadastro from '../pages/cadastro/cadastro';
+import Conteudos from '../pages/conteudos/conteudos';
+import DetalhesConteudo from '../pages/conteudos/detalhes-conteudo/detalhes-conteudo';
 
 const AppRoutes = () => {
     const Private =({children}) => {
@@ -15,7 +18,7 @@ const AppRoutes = () => {
         }
 
         if(!authenticated){
-            return <Navigate to="/login" />
+            return <Navigate to="/" />
         }
 
         return children;
@@ -25,8 +28,11 @@ const AppRoutes = () => {
         <Router>
             <AuthProvider>
                 <Routes>
-                    <Route  exact path="/login" element={<Login/>}/>
-                    <Route  exact path="/" element={<Home/>}/>
+                    <Route  exact path="/" element={<Login/>}/>
+                    <Route  exact path="/home" element={<Home/>}/>
+                    <Route  exact path="/cadastro" element={<Cadastro/>}/>
+                    <Route  exact path="/conteudos" element={<Conteudos/>}/>
+                    <Route  exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>
                 </Routes>   
             </AuthProvider>
         </Router>
