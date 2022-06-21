@@ -13,16 +13,18 @@ const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/user', userRoutes);
-app.use('/content', contentRoutes);
-app.use('/schoolClass', schoolClassRoutes);
-app.use('/schoolDiscipline', schoolDisciplineRoutes);
-
 app.use(authMiddleware);
 
 app.get('/', (req, res) => {
     res.json({ ok: true , user: req.userId });
 });
+
+app.use('/user', userRoutes);
+app.use('/content', contentRoutes);
+app.use('/schoolClass', schoolClassRoutes);
+//app.use('/schoolDiscipline', schoolDisciplineRoutes);
+
+
 
 
 const DB_USER = process.env.DB_USER;
