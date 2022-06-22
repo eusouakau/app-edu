@@ -127,11 +127,11 @@ router.delete('/:id', async (req, res) => {
     const user = {
         name,
         email,
-        password
-        // role,
-        // school,
-        // grade,
-        // class
+        password,
+        role,
+        school,
+        grade,
+        schoolClass
     };
 
     if(!user) {
