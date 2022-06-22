@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 
     const schoolClass = {
         name,
-        //students, 
+        students, 
         school, 
         grade
     }
