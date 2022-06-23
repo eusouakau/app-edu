@@ -7,15 +7,15 @@ const Input = ({
     value,
     onChange,
 }) => {
-    return (
-        <input
-            type={type}
-            placeholder={placeholder}
-            id={id}
-            value={value}
-            onChange={onChange}
-        />
-    );
+  return (
+    <input
+      type={type}
+      placeholder={placeholder}
+      id={id}
+      value={value}
+      onChange={onChange}
+    />
+  );
 };
 
 export default Input;

@@ -6,31 +6,31 @@ import { AuthContext } from "../../contexts/auth-context";
 import { ContentContainer } from "./style";
 
 const Home = () => {
-    const { authenticated, logout } = useContext(AuthContext);
+  const { authenticated, logout } = useContext(AuthContext);
 
-    const handleLogout = () => {
-        logout();
-    }
+  const handleLogout = () => {
+    logout();
+  }
 
-    return (
-        <Fragment>
-            <Header titulo="Disciplinas"/>
-            <ContentContainer>
-              <div className="row">
-                <DisciplinaContainer nomeDisciplina="Matematica" />
-                <DisciplinaContainer nomeDisciplina="Matematica" />
-              </div>
-              <div className="row">
-                <DisciplinaContainer nomeDisciplina="Matematica" />
-                <DisciplinaContainer nomeDisciplina="Matematica" />
-              </div>
-              <div className="row">
-                <DisciplinaContainer nomeDisciplina="Matematica" />
-                <DisciplinaContainer nomeDisciplina="Matematica" />
-              </div>
-            </ContentContainer>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      <Header titulo="Disciplinas"/>
+      <ContentContainer>
+        <div className="row">
+          <DisciplinaContainer nomeDisciplina="Matematica" />
+          <DisciplinaContainer nomeDisciplina="Matematica" />
+        </div>
+        <div className="row">
+          <DisciplinaContainer nomeDisciplina="Matematica" />
+          <DisciplinaContainer nomeDisciplina="Matematica" />
+        </div>
+        <div className="row">
+          <DisciplinaContainer nomeDisciplina="Matematica" />
+          <DisciplinaContainer nomeDisciplina="Matematica" />
+        </div>
+      </ContentContainer>
+    </Fragment>
+  );
 };
 
 export default Home;

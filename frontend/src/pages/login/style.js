@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const TitleStyled = styled.h1``;
+export const TitleStyled = styled.h1`
+  color: var(--amarelo);
+  width: 200px;
+  margin-bottom: 20px;
+  text-align: center;
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -10,6 +15,8 @@ export const Container = styled.div`
   
   height: 100vh;
   align-items: center;
+
+  background: var(--cinza-escuro);
 
   form {
     width: 250px;
@@ -29,8 +36,9 @@ export const InputContainer = styled.div`
 
   input{
     width: 100%;
-    height: 20px;
+    height: 30px;
     border: none;
+    border-radius: 10px;
     border-bottom: 1px solid var(--preto);
   }
 `;
@@ -47,6 +55,14 @@ export const ButtonStyled = styled.button`
   color: var(--branco);
   font-weight: 800;
   font-size: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :first-of-type {
+    margin-top: 100px;
+  }
 
   :hover {
     background: var(--preto);

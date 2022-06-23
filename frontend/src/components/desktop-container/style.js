@@ -27,9 +27,10 @@ export const IframeContainer = styled.div`
   min-height: 600px;
   max-height: 667px;
   border-radius: 15px;
-  box-shadow: 2px 3px 10px rgb(0 0 0 / 25%);
+  box-shadow: 2px 3px 10px var(--cinza-escuro);
 
   iframe {
     border-radius: 15px;
+    border: var(--cinza-escuro);
   }
 `;

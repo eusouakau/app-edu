@@ -9,9 +9,18 @@ export const Container = styled.div`
   height: 10vh;
 
   background: var(--cinza);
+
+  color: var(--amarelo);
 `;
 
-export const MenuStyled = styled.div``;
+export const MenuStyled = styled.button`
+  background: none;
+  border: none;
+
+  color: var(--amarelo);
+
+  cursor: pointer;
+`;
 
 export const TituloStyled = styled.h1``;
 
