@@ -20,56 +20,49 @@ const Cadastro = () => {
     navigate("/");
   }
 
-  const navigateToHome = () => {
-    navigate("/home");
-  }
-
   const toggleModal = () => {
-    console.log("aaa");
     setShowModal(!showModal);
   }
 
   return (
-    <Fragment>
-      <Container>
-        <TitleStyled>AppEdu Nome Escola</TitleStyled>                  
-        <form onSubmit={handleClick}>
-          <InputContainer>
-            <Input
-              type="nome"
-              placeholder=" Nome"
-              id="nome"
-              value={name}
-              onChange={e => setName(e.target.value)}
-            /> 
-          </InputContainer>
+    <Container>
+      <TitleStyled>AppEdu Nome Escola</TitleStyled>                  
+      <form onSubmit={handleClick}>
+        <InputContainer>
+          <Input
+            type="nome"
+            placeholder=" Nome"
+            id="nome"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          /> 
+        </InputContainer>
 
-          <InputContainer>
-            <Input
-              type="email"
-              placeholder=" Email"
-              id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            /> 
-          </InputContainer>
+        <InputContainer>
+          <Input
+            type="email"
+            placeholder=" Email"
+            id="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          /> 
+        </InputContainer>
 
-          <InputContainer>
-            <Input 
-              type="password"
-              placeholder=" Senha"
-              id="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </InputContainer>
+        <InputContainer>
+          <Input 
+            type="password"
+            placeholder=" Senha"
+            id="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </InputContainer>
 
-          <ButtonStyled type="button" onClick={toggleModal}>Cadastrar</ButtonStyled>
-          <ButtonStyled type="button" onClick={navigateToLogin}>Voltar</ButtonStyled>
-        </form>
-      </Container>
-      {showModal && <ModalCadatro />}
-    </Fragment>
+        <ButtonStyled type="button" onClick={toggleModal}>Cadastrar</ButtonStyled>
+        <ButtonStyled type="button" onClick={navigateToLogin}>Voltar</ButtonStyled>
+      </form>
+      {showModal && <ModalCadatro message='SUCESSO' onClick={toggleModal}/>}
+    </Container>
   )
 }
 

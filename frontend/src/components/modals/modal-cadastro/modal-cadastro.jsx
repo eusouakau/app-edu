@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { ModalContainer } from "./style";
+import { ButtonStyled } from "../../../styles/common";
+import { MessageStyled, ModalContainer } from "./style";
 
-const ModalCadatro = () => {
+const ModalCadatro = ({ message, onClick }) => {
   const navigate = useNavigate();
 
   const navigateToHome = () => {
@@ -10,10 +11,17 @@ const ModalCadatro = () => {
   }
   
   return (
-    <ModalContainer>
-      <p>Cadastro realizado com sucesso</p>
-      <button type="button" onClick={navigateToHome}>OK</button>
-    </ModalContainer>
+    message === 'SUCESSO' ? (
+      <ModalContainer>
+        <MessageStyled>Cadastro realizado com sucesso</MessageStyled>
+        <ButtonStyled type="button" onClick={navigateToHome}>OK</ButtonStyled>
+      </ModalContainer>
+    ) : (
+      <ModalContainer>
+        <MessageStyled>Ocorreu um erro, tente novamente</MessageStyled>
+        <ButtonStyled type="button" onClick={onClick}>OK</ButtonStyled>
+      </ModalContainer>
+    )
   );
 }
 
