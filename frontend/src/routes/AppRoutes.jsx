@@ -25,17 +25,17 @@ const AppRoutes = () => {
     }
 
     return (
-        <Router>
-            <AuthProvider>
-                <Routes>
-                    <Route  exact path="/" element={<Login/>}/>
-                    <Route  exact path="/home" element={<Home/>}/>
-                    <Route  exact path="/cadastro" element={<Cadastro/>}/>
-                    <Route  exact path="/conteudos" element={<Conteudos/>}/>
-                    <Route  exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>
-                </Routes>   
-            </AuthProvider>
-        </Router>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route  exact path="/" element={<Login/>}/>
+            <Route  exact path="/home" element={<Home/>}/>
+            <Route  exact path="/cadastro" element={<Cadastro/>}/>
+            <Route  exact path="/conteudos" element={<Conteudos/>}/>
+            <Route  exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>
+          </Routes>   
+        </AuthProvider>
+      </Router>
     )
 }
 

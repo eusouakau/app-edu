@@ -9,9 +9,10 @@ const GlobalStyle = createGlobalStyle`
   html{
     --branco: #FFFFFF;
     --preto: #000000;
+    --azul: #3C86FF;
+    --amarelo: #EBE900;
     --cinza: #444444;
-    --azul: #181cc9;
-    --azul-claro: #12abd9;
+    --cinza-escuro: #282828;
   }
 
   * {
