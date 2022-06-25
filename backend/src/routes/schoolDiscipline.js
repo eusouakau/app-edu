@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const SchoolDiscipline = require('../models/SchoolDiscipline');
+const authMiddleware = require('../middlewares/auth');
+
+router.use(authMiddleware);
 
 
 
