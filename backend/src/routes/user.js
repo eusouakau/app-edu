@@ -3,10 +3,15 @@ const bcrypt = require('bcryptjs');
 const authConfig = require('../config.json');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const authMiddleware = require('../middlewares/auth');
+
+
 
 const User = require('../models/User');
 
 const router = express.Router();
+
+router.use(authMiddleware);
 
 function generateToken(params = {}) {
     return jwt.sign(params, authConfig.secret, { expiresIn: 86400 });
@@ -152,3 +157,4 @@ router.delete('/:id', async (req, res) => {
 });
 
 module.exports = router;
+
