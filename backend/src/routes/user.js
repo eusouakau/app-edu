@@ -28,7 +28,9 @@ router.post('/cadastrar', async (req, res) => {
 
         user.password = undefined;
 
-        return res.status(201).json({ user, token: generateToken({ id: user.id }), message: 'Usuário criado com sucesso!' });
+        const token = generateToken({ id: user.id });
+
+        return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
     } catch (err) {
         return res.status(400).json({ error: 'Falha ao cadastrar' });
     }
@@ -92,6 +94,22 @@ router.get('/:id', async (req, res) => {
 
     try{
         const user = await User.findOne({_id: id});
+
+        if (!user) {
+            return res.status(404).json({error: 'Usuário não encontrado'});
+        }
+
+        res.status(200).json(user, token);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.get('/:name', async (req, res) => {
+    const { name } = req.params.name;
+
+    try{
+        const user = await User.findOne({name: name});
 
         if (!user) {
             return res.status(404).json({error: 'Usuário não encontrado'});
