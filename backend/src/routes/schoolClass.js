@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const SchoolClass = require('../models/SchoolClass');
+const authMiddleware = require('../middlewares/auth');
 
-
+router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { name, school, grade} = req.body;
@@ -47,6 +48,22 @@ router.get('/:id', async (req, res) => {
 
     try{
         const schoolClass = await SchoolClass.findOne({_id: id});
+
+        if (!schoolClass) {
+            return res.status(404).json({error: 'Turma não encontrada'});
+        }
+
+        res.status(200).json(schoolClass);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.get('/:name', async (req, res) => {
+    const { name } = req.params.name;
+
+    try{
+        const schoolClass = await SchoolClass.findOne({name: name});
 
         if (!schoolClass) {
             return res.status(404).json({error: 'Turma não encontrada'});

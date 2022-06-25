@@ -3,10 +3,15 @@ const bcrypt = require('bcryptjs');
 const authConfig = require('../config.json');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const authMiddleware = require('../middlewares/auth');
+
+
 
 const User = require('../models/User');
 
 const router = express.Router();
+
+router.use(authMiddleware);
 
 function generateToken(params = {}) {
     return jwt.sign(params, authConfig.secret, { expiresIn: 86400 });
@@ -23,7 +28,9 @@ router.post('/cadastrar', async (req, res) => {
 
         user.password = undefined;
 
-        return res.status(201).json({ user, token: generateToken({ id: user.id }), message: 'Usuário criado com sucesso!' });
+        const token = generateToken({ id: user.id });
+
+        return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
     } catch (err) {
         return res.status(400).json({ error: 'Falha ao cadastrar' });
     }
@@ -98,6 +105,22 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:name', async (req, res) => {
+    const { name } = req.params.name;
+
+    try{
+        const user = await User.findOne({name: name});
+
+        if (!user) {
+            return res.status(404).json({error: 'Usuário não encontrado'});
+        }
+
+        res.status(200).json(user, token);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
 router.patch('/:id', async (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
@@ -152,3 +175,4 @@ router.delete('/:id', async (req, res) => {
 });
 
 module.exports = router;
+

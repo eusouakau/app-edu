@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Content = require('../models/Content');
+const authMiddleware = require('../middlewares/auth');
 
-
+router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { title, description, link, schoolDiscipline} = req.body;
@@ -47,6 +48,22 @@ router.get('/:id', async (req, res) => {
 
     try{
         const content = await Content.findOne({_id: id});
+
+        if (!content) {
+            return res.status(404).json({error: 'Conteúdo não encontrado'});
+        }
+
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.get('/:title', async (req, res) => {
+    const { title } = req.params.title;
+
+    try{
+        const content = await Content.findOne({title: title});
 
         if (!content) {
             return res.status(404).json({error: 'Conteúdo não encontrado'});
