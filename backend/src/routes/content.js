@@ -59,6 +59,22 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:title', async (req, res) => {
+    const { title } = req.params.title;
+
+    try{
+        const content = await Content.findOne({title: title});
+
+        if (!content) {
+            return res.status(404).json({error: 'Conteúdo não encontrado'});
+        }
+
+        res.status(200).json(content);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
 router.patch('/:id', async (req, res) => {
     const { id } = req.params.id;
     const { title, description } = req.body;
