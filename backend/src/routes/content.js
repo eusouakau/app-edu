@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Content = require('../models/Content');
+const authMiddleware = require('../middlewares/auth');
 
-
+router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { title, description, link, schoolDiscipline} = req.body;
