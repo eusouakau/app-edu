@@ -3,8 +3,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+
 const app = express();
-const authMiddleware = require('./middlewares/auth');
+//const authMiddleware = require('./middlewares/auth');
+
 const userRoutes = require('./routes/user');
 const contentRoutes = require('./routes/content');
 const schoolClassRoutes = require('./routes/schoolClass');
@@ -13,7 +15,7 @@ const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(authMiddleware);
+//app.use(authMiddleware);
 
 app.get('/', (req, res) => {
     res.json({ ok: true , user: req.userId });
