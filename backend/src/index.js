@@ -11,7 +11,7 @@ const userRoutes = require('./routes/user');
 const contentRoutes = require('./routes/content');
 const schoolClassRoutes = require('./routes/schoolClass');
 const forumRoutes = require('./routes/forum');
-//const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
+const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +26,7 @@ app.use('/user', userRoutes);
 app.use('/content', contentRoutes);
 app.use('/schoolClass', schoolClassRoutes);
 app.use('/forum', forumRoutes);
-//app.use('/schoolDiscipline', schoolDisciplineRoutes);
+app.use('/schoolDiscipline', schoolDisciplineRoutes);
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD);
