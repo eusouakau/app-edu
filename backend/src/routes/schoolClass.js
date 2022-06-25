@@ -59,6 +59,22 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/:name', async (req, res) => {
+    const { name } = req.params.name;
+
+    try{
+        const schoolClass = await SchoolClass.findOne({name: name});
+
+        if (!schoolClass) {
+            return res.status(404).json({error: 'Turma não encontrada'});
+        }
+
+        res.status(200).json(schoolClass);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
+
 router.patch('/:id', async (req, res) => {
     const { id } = req.params.id;
     const { name, students, grade } = req.body;
