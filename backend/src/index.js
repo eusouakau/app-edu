@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/user', userRoutes);
 app.use('/content', contentRoutes);
 app.use('/schoolClass', schoolClassRoutes);
+app.use('/forum', forumRoutes);
 //app.use('/schoolDiscipline', schoolDisciplineRoutes);
 
 const DB_USER = process.env.DB_USER;
