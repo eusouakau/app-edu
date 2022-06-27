@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const Content = require('../models/Content');
-const authMiddleware = require('../middlewares/auth');
-
-router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { title, description, link, schoolDiscipline} = req.body;
@@ -47,7 +44,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params.id;
 
     try{
-        const content = await Content.findOne({_id: id});
+        const content = await Content.findOne({id: id});
 
         if (!content) {
             return res.status(404).json({error: 'Conteúdo não encontrado'});
@@ -85,7 +82,7 @@ router.patch('/:id', async (req, res) => {
     };
 
     try {
-        updatedContent = await Content.findOneAndUpdate({_id: id}, content);
+        updatedContent = await Content.findOneAndUpdate({id: id}, content);
 
         if (updateContent.mathedCount === 0) {
             return res.status(404).json({error: 'Conteúdo não encontrado'});
@@ -114,7 +111,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await Content.findOneAndDelete({_id: id});
+        await Content.findOneAndDelete({id: id});
 
         res.status(200).json({message: 'Conteúdo deletado com sucesso!'});
 
