@@ -24,9 +24,9 @@ router.post('/cadastrar', async (req, res) => {
 
         user.password = undefined;
 
-        const token = generateToken({ id: user.id });
+        // const token = generateToken({ id: user.id });
 
-        return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
+        return res.status(201).json({ user, message: 'Usuário criado com sucesso!' });
     } catch (err) {
         return res.status(400).json({ error: 'Falha ao cadastrar' });
     }

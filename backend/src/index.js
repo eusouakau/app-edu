@@ -20,6 +20,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
   }
 
+
 app.use(cors(corsOptions));
 //app.use(authMiddleware);
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ app.use('/content', contentRoutes);
 app.use('/school-class', schoolClassRoutes);
 app.use('/forum', forumRoutes);
 app.use('/school-discipline', schoolDisciplineRoutes);
+
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD);
