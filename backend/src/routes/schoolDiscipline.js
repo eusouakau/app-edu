@@ -1,10 +1,5 @@
 const router = require('express').Router();
 const SchoolDiscipline = require('../models/SchoolDiscipline');
-const authMiddleware = require('../middlewares/auth');
-
-router.use(authMiddleware);
-
-
 
 router.post('/', async (req, res) => {
     const { name, area } = req.body;
@@ -47,7 +42,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params.id;
 
     try{
-        const schoolDiscipline = await SchoolDiscipline.findOne({_id: id});
+        const schoolDiscipline = await SchoolDiscipline.findOne({id: id});
 
         if (!schoolDiscipline) {
             return res.status(404).json({error: 'Disciplina não encontrada'});
@@ -69,7 +64,7 @@ router.patch('/:id', async (req, res) => {
     };
 
     try {
-        updatedSchoolDiscipline = await SchoolDiscipline.findOneAndUpdate({_id: id}, schoolDiscipline);
+        updatedSchoolDiscipline = await SchoolDiscipline.findOneAndUpdate({id: id}, schoolDiscipline);
 
         if (updateSchoolDiscipline.mathedCount === 0) {
             return res.status(404).json({error: 'Disciplina não encontrada'});
@@ -98,7 +93,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await SchoolDiscipline.findOneAndDelete({_id: id});
+        await SchoolDiscipline.findOneAndDelete({id: id});
 
         res.status(200).json({message: 'Disciplina deletada com sucesso!'});
 

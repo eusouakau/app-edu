@@ -3,15 +3,11 @@ const bcrypt = require('bcryptjs');
 const authConfig = require('../config.json');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const authMiddleware = require('../middlewares/auth');
-
-
 
 const User = require('../models/User');
 
 const router = express.Router();
 
-router.use(authMiddleware);
 
 function generateToken(params = {}) {
     return jwt.sign(params, authConfig.secret, { expiresIn: 86400 });
@@ -93,7 +89,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params.id;
 
     try{
-        const user = await User.findOne({_id: id});
+        const user = await User.findOne({id: id});
 
         if (!user) {
             return res.status(404).json({error: 'Usuário não encontrado'});
@@ -122,7 +118,7 @@ router.get('/:name', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params.id;
     const { name, email } = req.body;
 
     const user = {
@@ -131,7 +127,7 @@ router.patch('/:id', async (req, res) => {
     };
 
     try {
-        updatedUser = await User.findOneAndUpdate({_id: id}, user);
+        updatedUser = await User.findOneAndUpdate({id: id}, user);
 
         if (updateUser.mathedCount === 0) {
             return res.status(404).json({error: 'Usuário não encontrado'});
@@ -163,7 +159,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await User.findOneAndDelete({_id: id});
+        await User.findOneAndDelete({id: id});
 
         res.status(200).json({message: 'Usuário excuído com sucesso'});
 

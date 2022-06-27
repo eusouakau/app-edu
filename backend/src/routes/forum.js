@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const Forum = require('../models/Forum');
-const authMiddleware = require('../middlewares/auth');
-
-router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { title, content, comment, user, create_at} = req.body;
@@ -48,7 +45,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params.id;
 
     try{
-        const forum = await Forum.findOne({_id: id});
+        const forum = await Forum.findOne({id: id});
 
         if (!forum) {
             return res.status(404).json({error: 'Comentário não encontrado'});
@@ -92,7 +89,7 @@ router.patch('/:id', async (req, res) => {
     };
 
     try {
-        updatedForum = await Forum.findOneAndUpdate({_id: id}, forum);
+        updatedForum = await Forum.findOneAndUpdate({id: id}, forum);
 
         if (updateForum.mathedCount === 0) {
             return res.status(404).json({error: 'Comentário não encontrado'});
@@ -122,7 +119,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await Forum.findOneAndDelete({_id: id});
+        await Forum.findOneAndDelete({id: id});
 
         res.status(200).json({message: 'Comentário deletado com sucesso!'});
 
