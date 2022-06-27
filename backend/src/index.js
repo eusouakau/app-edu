@@ -2,21 +2,30 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+//const authMiddleware = require('./middlewares/auth');
 
 
 const app = express();
-//const authMiddleware = require('./middlewares/auth');
+
 
 const userRoutes = require('./routes/user');
 const contentRoutes = require('./routes/content');
 const schoolClassRoutes = require('./routes/schoolClass');
 const forumRoutes = require('./routes/forum');
-//const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
+const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
 
+const corsOptions = {
+    origin: 'http://localhost:3050',
+    optionsSuccessStatus: 200
+  }
+
+app.use(cors(corsOptions));
+//app.use(authMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//app.use(authMiddleware);
+
 
 app.get('/', (req, res) => {
     res.json({ ok: true , user: req.userId });
@@ -24,8 +33,9 @@ app.get('/', (req, res) => {
 
 app.use('/user', userRoutes);
 app.use('/content', contentRoutes);
-app.use('/schoolClass', schoolClassRoutes);
-//app.use('/schoolDiscipline', schoolDisciplineRoutes);
+app.use('/school-class', schoolClassRoutes);
+app.use('/forum', forumRoutes);
+app.use('/school-discipline', schoolDisciplineRoutes);
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD);
