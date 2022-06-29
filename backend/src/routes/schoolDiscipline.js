@@ -39,10 +39,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     try{
-        const schoolDiscipline = await SchoolDiscipline.findOne({id: id});
+        const schoolDiscipline = await SchoolDiscipline.findOne({_id: id});
 
         if (!schoolDiscipline) {
             return res.status(404).json({error: 'Disciplina não encontrada'});
@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const { name, area} = req.body;
 
     const schoolDiscipline = {
@@ -64,9 +64,9 @@ router.patch('/:id', async (req, res) => {
     };
 
     try {
-        updatedSchoolDiscipline = await SchoolDiscipline.findOneAndUpdate({id: id}, schoolDiscipline);
+        updatedSchoolDiscipline = await SchoolDiscipline.findOneAndUpdate({_id: id}, schoolDiscipline);
 
-        if (updateSchoolDiscipline.mathedCount === 0) {
+        if (updatedSchoolDiscipline.mathedCount === 0) {
             return res.status(404).json({error: 'Disciplina não encontrada'});
         }
 
@@ -77,15 +77,9 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params.id;
-    const { name, area, content } = req.body;
+    const id = req.params.id;
 
-    const schoolDiscipline = {
-        name,
-        area, 
-        content, 
-        schoolDiscipline
-    };
+    const schoolDiscipline = await SchoolDiscipline.findOne({_id: id});
 
     if(!schoolDiscipline) {
         return res.status(422).json({error: 'Disciplina não encontrada'});
@@ -93,7 +87,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await SchoolDiscipline.findOneAndDelete({id: id});
+        await SchoolDiscipline.deleteOne({_id: id});
 
         res.status(200).json({message: 'Disciplina deletada com sucesso!'});
 
