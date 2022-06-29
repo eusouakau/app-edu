@@ -89,7 +89,7 @@ router.get('/:user', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const { title, comment } = req.body;
 
     const forum = {
@@ -98,9 +98,9 @@ router.patch('/:id', async (req, res) => {
     };
 
     try {
-        updatedForum = await Forum.findOneAndUpdate({id: id}, forum);
+        updatedForum = await Forum.findOneAndUpdate({_id: id}, forum);
 
-        if (updateForum.mathedCount === 0) {
+        if (updatedForum.mathedCount === 0) {
             return res.status(404).json({error: 'Comentário não encontrado'});
         }
 
@@ -112,23 +112,15 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params.id;
-    const { title, content, comment, user, create_at } = req.body;
 
-    const forum = {
-        title,
-        content, 
-        comment, 
-        user,
-        create_at
-    };
-
+    const forum = await Forum.findOne({_id: id});
     if(!forum) {
         return res.status(422).json({error: 'Comentário não encontrado'});
     }
 
     try {
         
-        await Forum.findOneAndDelete({id: id});
+        await Forum.deleteOne({_id: id});
 
         res.status(200).json({message: 'Comentário deletado com sucesso!'});
 
