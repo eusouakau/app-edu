@@ -102,7 +102,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:name', async (req, res) => {
-    const { name } = req.params.name;
+    const name  = req.params.name;
 
     try{
         const user = await User.findOne({name: name});
@@ -111,7 +111,7 @@ router.get('/:name', async (req, res) => {
             return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
-        res.status(200).json(user, token);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
@@ -141,18 +141,9 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params.id;
-    const { name, email, password } = req.body;
+    const id  = req.params.id;
 
-    const user = {
-        name,
-        email,
-        password,
-       // role,
-        school,
-        grade,
-        schoolClass
-    };
+    const user = await User.findOne({_id: id});
 
     if(!user) {
         return res.status(422).json({error: 'Usuário não encontrado'});
@@ -160,7 +151,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await User.findOneAndDelete({id: id});
+        await User.deleteOne({_id: id});
 
         res.status(200).json({message: 'Usuário excuído com sucesso'});
 
