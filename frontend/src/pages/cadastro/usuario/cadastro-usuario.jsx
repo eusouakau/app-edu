@@ -1,20 +1,16 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import ModalCadatro from "../../components/modals/modal-cadastro/modal-cadastro";
-import Input from "../../components/ui/input/input";
+import ModalCadastro from '../../../components/modals/modal-cadastro/modal-cadastro' 
+import Input from "../../../components/ui/input/input";
 import { ButtonStyled, Container, InputContainer, TitleStyled } from "./style";
 
-const Cadastro = () => {
+const CadastroUsuario = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
   const [showModal, setShowModal] = useState(false);
-
-  const handleClick = e => {
-  }
 
   const navigateToLogin = () => {
     navigate("/");
@@ -27,7 +23,7 @@ const Cadastro = () => {
   return (
     <Container>
       <TitleStyled>AppEdu Nome Escola</TitleStyled>                  
-      <form onSubmit={handleClick}>
+      <form>
         <InputContainer>
           <Input
             type="nome"
@@ -61,9 +57,16 @@ const Cadastro = () => {
         <ButtonStyled type="button" onClick={toggleModal}>Cadastrar</ButtonStyled>
         <ButtonStyled type="button" onClick={navigateToLogin}>Voltar</ButtonStyled>
       </form>
-      {showModal && <ModalCadatro message='SUCESSO' onClick={toggleModal}/>}
+      {showModal && 
+        <ModalCadastro
+          name={name}
+          email={email}
+          password={password}
+          onClick={toggleModal}
+          url="/home-professor"
+        />}
     </Container>
   )
 }
 
-export default Cadastro;
+export default CadastroUsuario;

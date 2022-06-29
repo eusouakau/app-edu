@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --amarelo: #EBE900;
     --cinza: #444444;
     --cinza-escuro: #282828;
+    --cinza-claro: #999999;
   }
 
   * {

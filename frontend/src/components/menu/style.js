@@ -22,6 +22,7 @@ export const MenuContainer = styled.div`
     li {
       font-size: 22px;
       color: var(--amarelo);
+      cursor: pointer;
 
       :hover {
         color: var(--azul);

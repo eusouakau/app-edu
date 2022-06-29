@@ -3,11 +3,14 @@ import React, { useContext } from 'react'
 import { BrowserRouter as Router , Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from '../contexts/auth-context';
 
-import Home from '../pages/home/home';
+import HomeEstudante from '../pages/home/estudante/home-estudante';
 import Login from '../pages/login/login';
-import Cadastro from '../pages/cadastro/cadastro';
+import CadastroUsuario from '../pages/cadastro/usuario/cadastro-usuario';
 import Conteudos from '../pages/conteudos/conteudos';
 import DetalhesConteudo from '../pages/conteudos/detalhes-conteudo/detalhes-conteudo';
+import HomeProfessor from '../pages/home/professor/home-professor';
+import Turma from '../pages/turma/turma';
+import CadastroAluno from '../pages/cadastro/aluno/cadastro-aluno';
 
 const AppRoutes = () => {
     const Private =({children}) => {
@@ -28,11 +31,14 @@ const AppRoutes = () => {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route  exact path="/" element={<Login/>}/>
-            <Route  exact path="/home" element={<Home/>}/>
-            <Route  exact path="/cadastro" element={<Cadastro/>}/>
-            <Route  exact path="/conteudos" element={<Conteudos/>}/>
-            <Route  exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>
+            <Route exact path="/" element={<Login/>}/>
+            <Route exact path="/home-estudante" element={<HomeEstudante/>}/>
+            <Route exact path="/cadastro" element={<CadastroUsuario/>}/>
+            <Route exact path="/conteudos" element={<Conteudos/>}/>
+            <Route exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>
+            <Route exact path="/home-professor" element={<HomeProfessor/>}/>
+            <Route exact path="/turma" element={<Turma/>}/>
+            <Route exact path="/cadastro-aluno" element={<CadastroAluno/>}/>
           </Routes>   
         </AuthProvider>
       </Router>

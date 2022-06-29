@@ -1,17 +1,10 @@
-import React, { Fragment, useContext } from "react";
-import Header from "../../components/header/header";
-import DisciplinaContainer from '../../components/disciplina-container/disciplina-container'
+import React, { Fragment } from "react";
+import Header from "../../../components/header/header";
+import DisciplinaContainer from '../../../components/disciplina-container/disciplina-container'
 
-import { AuthContext } from "../../contexts/auth-context";
 import { ContentContainer } from "./style";
 
-const Home = () => {
-  const { authenticated, logout } = useContext(AuthContext);
-
-  const handleLogout = () => {
-    logout();
-  }
-
+const HomeEstudante = () => {
   return (
     <Fragment>
       <Header titulo="Disciplinas"/>
@@ -33,4 +26,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeEstudante;
