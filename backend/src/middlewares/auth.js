@@ -4,7 +4,7 @@ const authConfig = require('../config.json');
 
 module.exports = (req, res, next) => {  
     const authHeader = req.headers.authorization;
-
+    console.log(authHeader);
     if(!authHeader) return res.status(401).send({ error: 'Token não informado!' });
 
     const parts = authHeader.split(' ');
@@ -15,12 +15,12 @@ module.exports = (req, res, next) => {
 
     if(!/^Bearer$/i.test(scheme)) return res.status(401).send({ error: 'Token malformado!' });
 
-    jwt.verify(token, authConfig.secret, (err, decoded) => {
-        if(err) return res.status(401).send({ error: 'Token inválido!' });
+    jwt.verify(token, authConfig.secret, (err, decoded) => { if(err) return res.status(401).send({ error: 'Token inválido!' });
 
-        req.userId = decoded.id;
-
-        return next();
+    req.id = decoded.id;
+    console.log(req.id);
+    
+    return next();
     });
 
 }
