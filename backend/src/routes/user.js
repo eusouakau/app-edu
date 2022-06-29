@@ -3,15 +3,11 @@ const bcrypt = require('bcryptjs');
 const authConfig = require('../config.json');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const authMiddleware = require('../middlewares/auth');
-
-
 
 const User = require('../models/User');
 
 const router = express.Router();
 
-router.use(authMiddleware);
 
 function generateToken(params = {}) {
     return jwt.sign(params, authConfig.secret, { expiresIn: 86400 });
@@ -28,9 +24,9 @@ router.post('/cadastrar', async (req, res) => {
 
         user.password = undefined;
 
-        // const token = generateToken({ id: user.id });
+        const token = generateToken({ id: user.id });
 
-        return res.status(201).json({ user, message: 'Usuário criado com sucesso!' });
+        return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
     } catch (err) {
         return res.status(400).json({ error: 'Falha ao cadastrar' });
     }
@@ -90,7 +86,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id  = req.params.id;
 
     try{
         const user = await User.findOne({_id: id});
@@ -99,14 +95,14 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
-        res.status(200).json(user, token);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
 });
 
 router.get('/:name', async (req, res) => {
-    const { name } = req.params.name;
+    const name  = req.params.name;
 
     try{
         const user = await User.findOne({name: name});
@@ -115,25 +111,26 @@ router.get('/:name', async (req, res) => {
             return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
-        res.status(200).json(user, token);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     const { name, email } = req.body;
 
     const user = {
-        name,
-        email
-    };
+        name: name,
+        email: email
+    }
 
     try {
-        updatedUser = await User.findOneAndUpdate({_id: id}, user);
+     
+        const updatedUser = await User.findOneAndUpdate({_id: id}, user);
 
-        if (updateUser.mathedCount === 0) {
+        if (updatedUser.mathedCount === 0) {
             return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
@@ -144,18 +141,9 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params.id;
-    const { name, email, password } = req.body;
+    const id  = req.params.id;
 
-    const user = {
-        name,
-        email,
-        password,
-        role,
-        school,
-        grade,
-        schoolClass
-    };
+    const user = await User.findOne({_id: id});
 
     if(!user) {
         return res.status(422).json({error: 'Usuário não encontrado'});
@@ -163,7 +151,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await User.findOneAndDelete({_id: id});
+        await User.deleteOne({_id: id});
 
         res.status(200).json({message: 'Usuário excuído com sucesso'});
 

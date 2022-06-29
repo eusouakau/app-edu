@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const Content = require('../models/Content');
-const authMiddleware = require('../middlewares/auth');
-
-router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { title, description, link, schoolDiscipline} = req.body;
@@ -44,7 +41,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     try{
         const content = await Content.findOne({_id: id});
@@ -60,7 +57,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:title', async (req, res) => {
-    const { title } = req.params.title;
+    const title = req.params.title;
 
     try{
         const content = await Content.findOne({title: title});
@@ -76,7 +73,7 @@ router.get('/:title', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const { title, description } = req.body;
 
     const content = {
@@ -87,7 +84,7 @@ router.patch('/:id', async (req, res) => {
     try {
         updatedContent = await Content.findOneAndUpdate({_id: id}, content);
 
-        if (updateContent.mathedCount === 0) {
+        if (updatedContent.mathedCount === 0) {
             return res.status(404).json({error: 'Conteúdo não encontrado'});
         }
 
@@ -98,15 +95,9 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params.id;
-    const { title, description, link, schoolDiscipline } = req.body;
+    const id = req.params.id;
 
-    const content = {
-        title,
-        description, 
-        link, 
-        schoolDiscipline
-    };
+    const content = await Content.findOne({_id: id});
 
     if(!content) {
         return res.status(422).json({error: 'Conteúdo não encontrado'});
@@ -114,7 +105,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await Content.findOneAndDelete({_id: id});
+        await Content.deleteOne({_id: id});
 
         res.status(200).json({message: 'Conteúdo deletado com sucesso!'});
 

@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const SchoolClass = require('../models/SchoolClass');
-const authMiddleware = require('../middlewares/auth');
 
-router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { name, school, grade} = req.body;
@@ -16,9 +14,9 @@ router.post('/', async (req, res) => {
 
     const schoolClass = {
         name,
-        students, 
         school, 
-        grade
+        grade,
+        students
     }
 
     try {
@@ -44,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     try{
         const schoolClass = await SchoolClass.findOne({_id: id});
@@ -60,7 +58,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:name', async (req, res) => {
-    const { name } = req.params.name;
+    const name = req.params.name;
 
     try{
         const schoolClass = await SchoolClass.findOne({name: name});
@@ -76,7 +74,7 @@ router.get('/:name', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const { name, students, grade } = req.body;
 
     const schoolClass = {
@@ -88,7 +86,7 @@ router.patch('/:id', async (req, res) => {
     try {
         updatedSchoolClass = await schoolClass.findOneAndUpdate({_id: id}, schoolClass);
 
-        if (updateschoolClass.mathedCount === 0) {
+        if (updatedschoolClass.mathedCount === 0) {
             return res.status(404).json({error: 'Turma não encontrada'});
         }
 
@@ -100,14 +98,8 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params.id;
-    const { name, students, school, grade } = req.body;
 
-    const schoolClass = {
-        name,
-        students, 
-        school, 
-        grade
-    };
+    const schoolClass = await SchoolClass.findOne({_id: id});
 
     if(!schoolClass) {
         return res.status(422).json({error: 'Turma não encontrada'});
@@ -115,7 +107,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await schoolClass.findOneAndDelete({_id: id});
+        await schoolClass.findOne({_id: id});
 
         res.status(200).json({message: 'Turma deletada com sucesso!'});
 

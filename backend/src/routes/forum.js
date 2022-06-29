@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const Forum = require('../models/Forum');
-const authMiddleware = require('../middlewares/auth');
-
-router.use(authMiddleware);
 
 router.post('/', async (req, res) => {
     const { title, content, comment, user, create_at} = req.body;
@@ -45,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     try{
         const forum = await Forum.findOne({_id: id});
@@ -54,36 +51,45 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({error: 'Comentário não encontrado'});
         }
 
-        res.status(200).json(Forum);
+        res.status(200).json(forum);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
 });
 
 router.get('/:content', async (req, res) => {
-    const { content } = req.params.content;
-    const forum = await Forum.findOne({content: content});
+    const content = req.params.content;
+    try{
+        const forum = await Forum.findOne({content: content});
 
-    if (!forum) {
-        return res.status(404).json({error: 'Conteúdo não possui comentários'});
+        if (!forum) {
+            return res.status(404).json({error: 'Conteúdo não possui comentários'});
+        }
+
+        res.status(200).json(forum);
+    } catch (error) {
+        res.status(500).json({error: error.message});
     }
-
-    res.status(200).json(forum);
 });
 
 router.get('/:user', async (req, res) => {
-    const { user } = req.params.user;
-    const forum = await Forum.findOne({user: user});
+    const user = req.params.user;
 
-    if (!forum) {
-        return res.status(404).json({error: 'Usuário não possui comentários'});
+    try{
+        const forum = await Forum.findOne({user: user});
+
+        if (!forum) {
+            return res.status(404).json({error: 'Usuário não possui comentários'});
+        }
+
+        res.status(200).json(forum);
+    } catch (error) {
+        res.status(500).json({error: error.message});
     }
-
-    res.status(200).json(forum);
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const { title, comment } = req.body;
 
     const forum = {
@@ -94,7 +100,7 @@ router.patch('/:id', async (req, res) => {
     try {
         updatedForum = await Forum.findOneAndUpdate({_id: id}, forum);
 
-        if (updateForum.mathedCount === 0) {
+        if (updatedForum.mathedCount === 0) {
             return res.status(404).json({error: 'Comentário não encontrado'});
         }
 
@@ -106,23 +112,15 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params.id;
-    const { title, content, comment, user, create_at } = req.body;
 
-    const forum = {
-        title,
-        content, 
-        comment, 
-        user,
-        create_at
-    };
-
+    const forum = await Forum.findOne({_id: id});
     if(!forum) {
         return res.status(422).json({error: 'Comentário não encontrado'});
     }
 
     try {
         
-        await Forum.findOneAndDelete({_id: id});
+        await Forum.deleteOne({_id: id});
 
         res.status(200).json({message: 'Comentário deletado com sucesso!'});
 
