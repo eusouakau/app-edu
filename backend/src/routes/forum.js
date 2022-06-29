@@ -42,30 +42,34 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     try{
-        const forum = await Forum.findOne({id: id});
+        const forum = await Forum.findOne({_id: id});
 
         if (!forum) {
             return res.status(404).json({error: 'Comentário não encontrado'});
         }
 
-        res.status(200).json(Forum);
+        res.status(200).json(forum);
     } catch (error) {
         res.status(500).json({error: error.message});
     }
 });
 
 router.get('/:content', async (req, res) => {
-    const { content } = req.params.content;
-    const forum = await Forum.findOne({content: content});
+    const content = req.params.content;
+    try{
+        const forum = await Forum.findOne({content: content});
 
-    if (!forum) {
-        return res.status(404).json({error: 'Conteúdo não possui comentários'});
+        if (!forum) {
+            return res.status(404).json({error: 'Conteúdo não possui comentários'});
+        }
+
+        res.status(200).json(forum);
+    } catch (error) {
+        res.status(500).json({error: error.message});
     }
-
-    res.status(200).json(forum);
 });
 
 router.get('/:user', async (req, res) => {
