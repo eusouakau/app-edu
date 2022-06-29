@@ -118,18 +118,19 @@ router.get('/:name', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const { name, email } = req.body;
 
     const user = {
-        name,
-        email
-    };
+        name: name,
+        email: email
+    }
 
     try {
-        updatedUser = await User.findOneAndUpdate({id: id}, user);
+     
+        const updatedUser = await User.findOneAndUpdate({_id: id}, user);
 
-        if (updateUser.mathedCount === 0) {
+        if (updatedUser.mathedCount === 0) {
             return res.status(404).json({error: 'Usuário não encontrado'});
         }
 
@@ -147,7 +148,7 @@ router.delete('/:id', async (req, res) => {
         name,
         email,
         password,
-        role,
+       // role,
         school,
         grade,
         schoolClass
