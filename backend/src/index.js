@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-//const authMiddleware = require('./middlewares/auth');
+const authMiddleware = require('./middlewares/auth');
 
 
 const app = express();
@@ -22,7 +22,7 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions));
-//app.use(authMiddleware);
+app.use(authMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
