@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
 
   height: 10vh;
+  width: 100vw;
 
   background: var(--cinza);
 

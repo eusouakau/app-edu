@@ -1,10 +1,29 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  height: 100vh;
+  align-items: center;
+
+  background: var(--cinza-escuro);
+
+  form {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  color: var(--amarelo);
+`;
+
 export const MenuButton = styled.button`
   display: flex;
   margin: 20px;
 
-  width: 150px;
+  width: 90vw;;
 
   gap: 10px;
 
@@ -31,6 +50,8 @@ export const ListStyled = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  width: 90vw;
 
   margin: 20px;
 

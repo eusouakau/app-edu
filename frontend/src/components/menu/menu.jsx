@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/auth-context";
-import { MenuContainer } from "./style";
+import { CloseButton, MenuContainer } from "./style";
 
-const Menu = () => {
+const Menu = ({onClick}) => {
   const navigate = useNavigate();
   const { logout } = AuthContext;
 
@@ -13,6 +13,7 @@ const Menu = () => {
 
   return (
     <MenuContainer>
+      <CloseButton type="button" onClick={onClick}>X</CloseButton>
       <ul>
         <li onClick={handleNavigateTo("/home")}>Disciplinas</li>
         <li onClick={handleNavigateTo("/forum")}>Forum</li>

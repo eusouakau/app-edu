@@ -24,9 +24,8 @@ const CadastroAluno = () => {
   }
 
   return (
-    <Fragment>
+    <Container>
       <Header titulo="Cadastrar aluno"/>
-      <Container>
         <form>
           <InputContainer>
             <Input
@@ -89,8 +88,7 @@ const CadastroAluno = () => {
             onClick={toggleModal}
             url="/cadastrar-aluno"
           />}
-        </Container>
-    </Fragment>
+    </Container>
   );
 }
 

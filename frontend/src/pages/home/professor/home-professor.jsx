@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import Header from "../../../components/header/header";
-import { ListStyled, MenuButtons } from "./style";
+import { Container, ListStyled, MenuButtons } from "./style";
 
 const HomeProfessor = () => {
   return (
-    <Fragment>
+    <Container>
       <Header titulo="Home Professor" />
       <MenuButtons>
         <button type="button">Cadastrar Turma</button>
@@ -18,7 +18,7 @@ const HomeProfessor = () => {
         <li><p>Turma 2A <span>legenda</span></p> <strong>&gt;</strong> </li>
         <li><p>Turma 2A <span>legenda</span></p> <strong>&gt;</strong> </li>
       </ListStyled>
-    </Fragment>
+    </Container>
   );
 }
 

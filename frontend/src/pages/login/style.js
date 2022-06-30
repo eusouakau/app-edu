@@ -37,9 +37,15 @@ export const InputContainer = styled.div`
   input{
     width: 100%;
     height: 30px;
+
     border: none;
     border-radius: 10px;
     border-bottom: 1px solid var(--preto);
+
+    background: var(--cinza-claro);
+    
+    color: var(--branco);
+    font-size: 16px;
   }
 `;
 

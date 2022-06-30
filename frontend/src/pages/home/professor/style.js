@@ -1,10 +1,28 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  height: 100vh;
+  align-items: center;
+
+  background: var(--cinza-escuro);
+
+  form {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 export const MenuButtons = styled.div`
   display: flex;
   justify-content: space-around;
 
   height: 50px;
+  width: 100vw;
 
   margin: 40px 0;
 
@@ -29,6 +47,8 @@ export const ListStyled = styled.ul`
   flex-direction: column;
   gap: 30px;
 
+  width: 90vw;
+
   list-style: none;
 
   margin: 0 20px;
@@ -40,8 +60,11 @@ export const ListStyled = styled.ul`
     align-items: center;
     cursor: pointer;
 
+    color: var(--amarelo);
+
     :hover {
       background: var(--cinza-claro);
+      border-radius: 5px;
     }
 
     p {

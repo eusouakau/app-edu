@@ -2,11 +2,11 @@ import React, { Fragment } from "react";
 import Header from "../../../components/header/header";
 import DisciplinaContainer from '../../../components/disciplina-container/disciplina-container'
 
-import { ContentContainer } from "./style";
+import { Container, ContentContainer } from "./style";
 
-const HomeEstudante = () => {
+const HomeAluno = () => {
   return (
-    <Fragment>
+    <Container>
       <Header titulo="Disciplinas"/>
       <ContentContainer>
         <div className="row">
@@ -22,8 +22,8 @@ const HomeEstudante = () => {
           <DisciplinaContainer nomeDisciplina="Matematica" />
         </div>
       </ContentContainer>
-    </Fragment>
+    </Container>
   );
 };
 
-export default HomeEstudante;
+export default HomeAluno;
