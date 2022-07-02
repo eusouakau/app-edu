@@ -17,7 +17,8 @@ const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
 
 const corsOptions = {
     origin: 'http://localhost:3050',
-    optionsSuccessStatus: 200
+    credentials:true,           
+    optionSuccessStatus:200
   }
 
 
