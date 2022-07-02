@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MenuContainer = styled.div`
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   position: fixed;
 
   z-index: 2;
@@ -15,17 +15,29 @@ export const MenuContainer = styled.div`
   ul {
     display: flex;
     flex-direction: column;
-    list-style: none;
-
     justify-content: space-evenly;
+
+    list-style: none;
 
     li {
       font-size: 22px;
       color: var(--amarelo);
+      cursor: pointer;
 
       :hover {
         color: var(--azul);
       }
     }
   }
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  margin-top: 50px;
+  
+  background: none;
+  border: none;
+
+  cursor: pointer;
+  color: var(--amarelo);
 `;

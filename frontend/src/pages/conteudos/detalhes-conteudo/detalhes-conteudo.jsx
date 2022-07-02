@@ -1,25 +1,25 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Header from "../../../components/header/header";
-import { ContentContainer } from "../style";
-import { ButtonStyled, TextStyled } from "./style";
+import YoutubeEmbed from "../../../components/ui/youtube-embed/youtube-embed";
+import { ButtonStyled, Container, ContentStyled, TextStyled, ContainerVideo } from "./style";
 
 const DetalhesConteudo = ({tituloConteudo}) => {
   tituloConteudo = "Matematica";
   
   return (
-    <Fragment>
+    <Container>
       <Header titulo={tituloConteudo} />
-      <ContentContainer>
+      <ContentStyled>
         <TextStyled>
           <p>Descrição do conteudo</p>
           <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
         </TextStyled>
-        <div>
-
-        </div>
+        <ContainerVideo>
+          <YoutubeEmbed embedId="gVI8uwkUoHg"/>
+        </ContainerVideo>
         <ButtonStyled type="button">Forum de Duvidas</ButtonStyled>
-      </ContentContainer>
-    </Fragment>
+      </ContentStyled>
+    </Container>
   );
 }
 

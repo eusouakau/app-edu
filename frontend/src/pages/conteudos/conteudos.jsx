@@ -1,29 +1,29 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Header from "../../components/header/header";
-import { ContentContainer, ConteudoContainer } from "./style";
+import { Container, ContentContainer, ConteudoContainer } from "./style";
 
 const Conteudos = ({ nomeDisciplina }) => {
   nomeDisciplina = "Matematica";
 
   return (
-    <Fragment>
+    <Container>
       <Header titulo="Conteudos"/>
       <ContentContainer>
         <p>{nomeDisciplina}</p>
         <ConteudoContainer>
           <p>Titulo do conteudo</p>
-          <p>Descrição</p>
+          <span>Descrição</span>
         </ConteudoContainer>
         <ConteudoContainer>
           <p>Titulo do conteudo</p>
-          <p>Descrição</p>
+          <span>Descrição</span>
         </ConteudoContainer>
         <ConteudoContainer>
           <p>Titulo do conteudo</p>
-          <p>Descrição</p>
+          <span>Descrição</span>
         </ConteudoContainer>
       </ContentContainer>
-    </Fragment>
+    </Container>
   );
 }
 

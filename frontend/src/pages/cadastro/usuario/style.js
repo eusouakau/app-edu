@@ -12,7 +12,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  
+
   height: 100vh;
   align-items: center;
 
@@ -53,7 +53,7 @@ export const ButtonStyled = styled.button`
   width: 100%;
   height: 30px;
   margin-top: 20px;
-  
+
   border-radius: 10px;
   border: none;
   background: var(--cinza);
@@ -72,27 +72,6 @@ export const ButtonStyled = styled.button`
 
   :hover {
     background: var(--preto);
-    cursor: pointer;
-  }
-`;
-
-export const LinkStyled = styled.button`
-  width: 50%;
-  height: 20px;
-  margin-top: 20px;
-
-  border-radius: 10px;
-  border: none;
-  background: none;
-
-  color: var(--azul);
-  font-weight: 800;
-  font-size: 12px;
-
-  align-self: center;
-
-  :hover {
-    background: var(--azul-claro);
     cursor: pointer;
   }
 `;

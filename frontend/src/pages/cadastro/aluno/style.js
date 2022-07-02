@@ -1,16 +1,8 @@
 import styled from "styled-components";
 
-export const TitleStyled = styled.h1`
-  color: var(--amarelo);
-  width: 200px;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 20px;
 
   height: 100vh;
@@ -37,9 +29,15 @@ export const InputContainer = styled.div`
   input{
     width: 100%;
     height: 30px;
+
     border: none;
     border-radius: 10px;
     border-bottom: 1px solid var(--preto);
+
+    background: var(--cinza-claro);
+    
+    color: var(--branco);
+    font-size: 16px;
   }
 `;
 

@@ -3,18 +3,18 @@ import { useNavigate } from "react-router";
 import { ButtonStyled } from "../../../styles/common";
 import { MessageStyled, ModalContainer } from "./style";
 
-const ModalCadatro = ({ message, onClick }) => {
+const ModalCadatro = ({ successCadastro, onClick, url }) => {
   const navigate = useNavigate();
 
-  const navigateToHome = () => {
-    navigate('/home');
+  const navigateTo = () => {
+    navigate({url});
   }
   
   return (
-    message === 'SUCESSO' ? (
+    successCadastro ? (
       <ModalContainer>
         <MessageStyled>Cadastro realizado com sucesso</MessageStyled>
-        <ButtonStyled type="button" onClick={navigateToHome}>OK</ButtonStyled>
+        <ButtonStyled type="button" onClick={navigateTo}>OK</ButtonStyled>
       </ModalContainer>
     ) : (
       <ModalContainer>

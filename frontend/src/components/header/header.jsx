@@ -16,7 +16,7 @@ const Header = ({ titulo }) => {
         <TituloStyled>{titulo}</TituloStyled>
         <Pesquisa>Lupa</Pesquisa>
       </Container>
-      {openMenu && <Menu />}
+      {openMenu && <Menu onClick={toggleMenu}/>}
     </Fragment>
   );
 }

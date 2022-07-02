@@ -1,33 +1,38 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import ModalCadatro from "../../components/modals/modal-cadastro/modal-cadastro";
-import Input from "../../components/ui/input/input";
+import ModalCadastro from '../../../components/modals/modal-cadastro/modal-cadastro' 
+import Input from "../../../components/ui/input/input";
+import { cadastrarUsuario } from "../../../services/api";
 import { ButtonStyled, Container, InputContainer, TitleStyled } from "./style";
 
-const Cadastro = () => {
+const CadastroUsuario = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
   const [showModal, setShowModal] = useState(false);
-
-  const handleClick = e => {
-  }
+  const [successCadastro, setSuccessCadastro] = useState(false);
 
   const navigateToLogin = () => {
     navigate("/");
   }
 
-  const toggleModal = () => {
+  const cadastrar = async dados => {
+    console.log("dados", dados);
+    console.log(await cadastrarUsuario(dados));
+    return await cadastrarUsuario(dados);
+  }
+
+  const toggleModal = async dados => {
+    await cadastrar(dados);
     setShowModal(!showModal);
   }
 
   return (
     <Container>
       <TitleStyled>AppEdu Nome Escola</TitleStyled>                  
-      <form onSubmit={handleClick}>
+      <form>
         <InputContainer>
           <Input
             type="nome"
@@ -58,12 +63,17 @@ const Cadastro = () => {
           />
         </InputContainer>
 
-        <ButtonStyled type="button" onClick={toggleModal}>Cadastrar</ButtonStyled>
+        <ButtonStyled type="button" onClick={() => toggleModal(email)}>Cadastrar</ButtonStyled>
         <ButtonStyled type="button" onClick={navigateToLogin}>Voltar</ButtonStyled>
       </form>
-      {showModal && <ModalCadatro message='SUCESSO' onClick={toggleModal}/>}
+      {showModal && 
+        <ModalCadastro
+          onClick={toggleModal}
+          successCadastro={successCadastro}
+          url="/home-professor"
+        />}
     </Container>
   )
 }
 
-export default Cadastro;
+export default CadastroUsuario;
