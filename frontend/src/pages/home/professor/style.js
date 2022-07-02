@@ -57,9 +57,12 @@ export const ListStyled = styled.ul`
     display: flex;
     justify-content: space-between;
 
+    height: 50px;
+
     align-items: center;
     cursor: pointer;
 
+    font-size: 20px;
     color: var(--amarelo);
 
     :hover {
@@ -73,7 +76,7 @@ export const ListStyled = styled.ul`
 
       span {
         margin-left: 10px;
-        font-size: 12px;
+        font-size: 14px;
       }
     }
   }

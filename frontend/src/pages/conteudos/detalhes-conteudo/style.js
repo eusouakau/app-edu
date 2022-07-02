@@ -58,6 +58,6 @@ export const ButtonStyled = styled.button`
 `;
 
 export const ContainerVideo = styled.div`
-  height: 40vh;
+  height: fit-content;
   width: 90vw;
 `;

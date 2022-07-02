@@ -18,21 +18,22 @@ const CadastroUsuario = () => {
     navigate("/");
   }
 
-  const cadastrar = async dados => {
-    console.log("dados", dados);
-    console.log(await cadastrarUsuario(dados));
-    return await cadastrarUsuario(dados);
+  const cadastrar = async () => {
+    if (await cadastrarUsuario(name, email, password)) {
+      setSuccessCadastro(true);
+    }
+    return await cadastrarUsuario(name, email, password);
   }
 
-  const toggleModal = async dados => {
-    await cadastrar(dados);
+  const toggleModal = async () => {
+    await cadastrar();
     setShowModal(!showModal);
   }
 
   return (
     <Container>
       <TitleStyled>AppEdu Nome Escola</TitleStyled>                  
-      <form>
+      <form onSubmit={toggleModal}>
         <InputContainer>
           <Input
             type="nome"
@@ -63,7 +64,7 @@ const CadastroUsuario = () => {
           />
         </InputContainer>
 
-        <ButtonStyled type="button" onClick={() => toggleModal(email)}>Cadastrar</ButtonStyled>
+        <ButtonStyled type="submit">Cadastrar</ButtonStyled>
         <ButtonStyled type="button" onClick={navigateToLogin}>Voltar</ButtonStyled>
       </form>
       {showModal && 

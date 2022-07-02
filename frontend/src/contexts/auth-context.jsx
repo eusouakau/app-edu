@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api, createSession } from '../services/api';
+import { api, logar } from '../services/api';
 
 export const AuthContext = createContext();
 
@@ -22,8 +22,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await createSession(email, password);
-
+    const response = await logar(email, password);
+    console.log('user', response.data.user);
     const loggedUser = response.data.user;
     const token = response.data.token;
 
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     setUser(loggedUser);
-    navigate("/home");
+    navigate("/home-professor");
   };
 
   const logout = () => {

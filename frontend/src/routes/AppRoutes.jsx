@@ -43,7 +43,7 @@ const AppRoutes = () => {
 
             <Route exact path="/conteudos" element={<Conteudos/>}/>
             <Route exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>
-            <Route exact path="/turma" element={<Turma/>}/>
+            <Route exact path="/turma/:id" element={<Turma />}/>
           </Routes>   
         </AuthProvider>
       </Router>
