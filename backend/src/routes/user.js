@@ -14,17 +14,31 @@ function generateToken(params = {}) {
 }
 
 router.post('/cadastrar', async (req, res) => {
-    const { email } = req.body;
+    // TODO apos os testes adicionar o role como required
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+        res.status(422).json({
+            error: 'Dados insuficientes'
+        });
+        return;
+    }
+
+    const user = {
+        name,
+        email,
+        password: bcrypt.hashSync(password, 8)
+    }
 
     try {
         if(await User.findOne({ email })) 
             return res.status(400).json({ error: 'Email já cadastrado!'});
 
-        const user = await User.create(req.body);
+        await User.create(user);
 
         user.password = undefined;
 
-        const token = generateToken({ id: user.id });
+        const token = generateToken({ _id: user.id });
 
         return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
     } catch (err) {
@@ -44,7 +58,7 @@ router.post('/login', async (req, res) => {
 
     user.password = undefined;
 
-    const token = generateToken({ id: user.id });
+    const token = generateToken({ _id: user.id });
 
     res.json({ user, token });
 });
