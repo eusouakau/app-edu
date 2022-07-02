@@ -4,7 +4,7 @@ const authConfig = require('../config.json');
 
 module.exports = (req, res, next) => {  
     const authHeader = req.headers.authorization;
-    console.log(authHeader);
+    //console.log(authHeader);
     if(!authHeader) return res.status(401).send({ error: 'Token não informado!' });
 
     const parts = authHeader.split(' ');
@@ -18,8 +18,7 @@ module.exports = (req, res, next) => {
     jwt.verify(token, authConfig.secret, (err, decoded) => { if(err) return res.status(401).send({ error: 'Token inválido!' });
 
     req.id = decoded.id;
-    console.log(req.id);
-    
+
     return next();
     });
 
