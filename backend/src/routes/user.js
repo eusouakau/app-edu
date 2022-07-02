@@ -27,12 +27,12 @@ router.post('/cadastrar', async (req, res) => {
     const user = {
         name,
         email,
-        password: bcrypt.hashSync(password, 8)
+        password
     }
 
     try {
         if(await User.findOne({ email })) 
-            return res.status(400).json({ error: 'Email já cadastrado!'});
+            return res.status(422).json({ error: 'Email já cadastrado!'});
 
         await User.create(user);
 
@@ -42,7 +42,8 @@ router.post('/cadastrar', async (req, res) => {
 
         return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
     } catch (err) {
-        return res.status(400).json({ error: 'Falha ao cadastrar' });
+
+        return res.status(501).json({ error: 'Erro ao cadastrar!' });
     }
 });
 
