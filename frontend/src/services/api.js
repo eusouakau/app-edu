@@ -7,13 +7,13 @@ export const createSession = async (email, password) => {
 };
 
 export const cadastrarUsuario = async (nome, email, senha) => {
-  return axios.post("user/cadastrar", { email });
+  return api.post("/user/cadastrar", { email });
 };
 
 export const login = async (email, password) => {
-  return axios.post("user/login", {email, password});
+  return api.post("/user/login", {email, password});
 }
 
 export const recuperarSenha = async (email) => {
-  return axios.post("user/recuperar-senha", {email});
+  return api.post("/user/recuperar-senha", {email});
 }

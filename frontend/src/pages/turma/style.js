@@ -27,6 +27,7 @@ export const MenuButton = styled.button`
 
   gap: 10px;
 
+  color: var(--branco);
   align-items: center;
 
   border: none;
@@ -36,11 +37,13 @@ export const MenuButton = styled.button`
 `;
 
 export const ButtonStyled = styled.button`
-  background: var(--cinza-escuro);
+  background: var(--branco);
   border: none;
   border-radius: 20px;
 
-  color: var(--branco);
+  color: var(--cinza-escuro);
+  font-size: 20px;
+  font-weight: bold;
 
   height: 30px;
   width: 30px;
@@ -66,6 +69,10 @@ export const ListStyled = styled.ul`
     span {
       font-size: 12px;
       margin-left: 10px;
+    }
+
+    :hover {
+      background: var(--cinza-claro);
     }
   }
 `;

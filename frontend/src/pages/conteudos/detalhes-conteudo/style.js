@@ -1,15 +1,44 @@
 import styled from "styled-components";
 
-export const ContainerStyled = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
+
+  height: 100vh;
+  align-items: center;
+
+  background: var(--cinza-escuro);
+
+  form {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  color: var(--amarelo);
+`;
+
+export const ContentStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  width: 90vw;
+
+  margin: 20px 10px 0;
 `;
 
 export const TextStyled = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 90vw;
+  width: 80vw;
+
+  p {
+    word-break: break-all;
+  }
 `;
 
 export const ButtonStyled = styled.button`
@@ -26,4 +55,9 @@ export const ButtonStyled = styled.button`
     background: var(--preto);
     cursor: pointer;
   }
+`;
+
+export const ContainerVideo = styled.div`
+  height: 40vh;
+  width: 90vw;
 `;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ModalCadastro from '../../../components/modals/modal-cadastro/modal-cadastro' 
 import Input from "../../../components/ui/input/input";
+import { cadastrarUsuario } from "../../../services/api";
 import { ButtonStyled, Container, InputContainer, TitleStyled } from "./style";
 
 const CadastroUsuario = () => {
@@ -11,12 +12,20 @@ const CadastroUsuario = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [successCadastro, setSuccessCadastro] = useState(false);
 
   const navigateToLogin = () => {
     navigate("/");
   }
 
-  const toggleModal = () => {
+  const cadastrar = async dados => {
+    console.log("dados", dados);
+    console.log(await cadastrarUsuario(dados));
+    return await cadastrarUsuario(dados);
+  }
+
+  const toggleModal = async dados => {
+    await cadastrar(dados);
     setShowModal(!showModal);
   }
 
@@ -54,15 +63,13 @@ const CadastroUsuario = () => {
           />
         </InputContainer>
 
-        <ButtonStyled type="button" onClick={toggleModal}>Cadastrar</ButtonStyled>
+        <ButtonStyled type="button" onClick={() => toggleModal(email)}>Cadastrar</ButtonStyled>
         <ButtonStyled type="button" onClick={navigateToLogin}>Voltar</ButtonStyled>
       </form>
       {showModal && 
         <ModalCadastro
-          name={name}
-          email={email}
-          password={password}
           onClick={toggleModal}
+          successCadastro={successCadastro}
           url="/home-professor"
         />}
     </Container>

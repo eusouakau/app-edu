@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ModalCadastro from '../../../components/modals/modal-cadastro/modal-cadastro'
 import Header from "../../../components/header/header";
