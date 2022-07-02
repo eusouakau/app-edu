@@ -16,14 +16,14 @@ const forumRoutes = require('./routes/forum');
 const schoolDisciplineRoutes = require('./routes/schoolDiscipline');
 
 const corsOptions = {
-    origin: 'http://localhost:3050',
+    origin: 'http://localhost:3000',
     credentials:true,           
     optionSuccessStatus:200
   }
 
 
 app.use(cors(corsOptions));
-app.use(authMiddleware);
+//app.use(authMiddleware);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

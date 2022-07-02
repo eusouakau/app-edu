@@ -10,7 +10,8 @@ const UserSchema = new Schema({
     name: { type: String, require: true},
     email: { type: String, unique: true, required: true, lowercase: true},
     password: { type: String, required: true, select: true },
-    role: { type: String, required: true, enum: ['teacher', 'student']},
+    //TODO: adicionar o role como required
+    role: { type: String, required: false, enum: ['teacher', 'student']},
     school: { type: String, required: false },
     grade: { type: String, required: false },
     schoolClass: { type: ObjectId, required: false },
