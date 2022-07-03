@@ -14,7 +14,6 @@ function generateToken(params = {}) {
 }
 
 router.post('/cadastrar', async (req, res) => {
-    // TODO apos os testes adicionar o role como required
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
