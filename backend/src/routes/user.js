@@ -27,7 +27,8 @@ router.post('/cadastrar', async (req, res) => {
     const user = {
         name,
         email,
-        password
+        password,
+        role: 'teacher'
     }
 
     try {
@@ -46,6 +47,8 @@ router.post('/cadastrar', async (req, res) => {
         return res.status(501).json({ error: 'Erro ao cadastrar!' });
     }
 });
+
+
 
 router.post('/login', async (req, res) => { 
     const { email, password } = req.body;
