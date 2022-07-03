@@ -48,7 +48,41 @@ router.post('/cadastrar', async (req, res) => {
     }
 });
 
+router.post('cadastrar-aluno', async (req, res) => {
+    const { name, email, password, school, grade, schoolClass } = req.body;
 
+    if (!name || !email || !password || !school || !grade || !schoolClass) {
+        res.status(422).json({
+            error: 'Dados insuficientes'
+        });
+        return;
+    }
+
+    const user = {
+        name,
+        email,
+        password,
+        role: 'student',
+        school,
+        grade,
+        schoolClass
+    }
+
+    try {
+        if(await User.findOne({ email })) 
+            return res.status(422).json({ error: 'Email já cadastrado!'});
+
+        await User.create(user);
+
+        user.password = undefined;
+
+        const token = generateToken({ _id: user.id });
+
+        return res.status(201).json({ user, token, message: 'Usuário criado com sucesso!' });
+    } catch (err) {
+        return res.status(501).json({ error: 'Erro ao cadastrar!' });
+    }
+});
 
 router.post('/login', async (req, res) => { 
     const { email, password } = req.body;
