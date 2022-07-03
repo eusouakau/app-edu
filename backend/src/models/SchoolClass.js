@@ -7,6 +7,7 @@ const ObjectId = Schema.ObjectId;
 
 const SchoolClassSchema = new Schema({
     name: { type: String, require: true },
+    teacher: { type: ObjectId, required: true },
     students: { type: [ObjectId], required: false },
     school: { type: String, required: true, },
     grade: { type: String, required: true },
