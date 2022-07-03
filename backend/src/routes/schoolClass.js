@@ -3,9 +3,9 @@ const SchoolClass = require('../models/SchoolClass');
 
 
 router.post('/', async (req, res) => {
-    const { name, school, grade} = req.body;
+    const { name, teacher, school, grade} = req.body;
 
-    if (!name || !school || !grade) {
+    if (!name || !teacher || !school || !grade) {
         res.status(422).json({
             error: 'Dados incompletos'
         });
@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
 
     const schoolClass = {
         name,
+        teacher,
         school, 
         grade,
         students
