@@ -111,9 +111,10 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     const forum = await Forum.findOne({_id: id});
+    
     if(!forum) {
         return res.status(422).json({error: 'Comentário não encontrado'});
     }

@@ -97,7 +97,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
 
     const schoolClass = await SchoolClass.findOne({_id: id});
 
@@ -107,7 +107,7 @@ router.delete('/:id', async (req, res) => {
 
     try {
         
-        await schoolClass.findOne({_id: id});
+        await schoolClass.deleteOne({_id: id});
 
         res.status(200).json({message: 'Turma deletada com sucesso!'});
 
