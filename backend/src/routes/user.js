@@ -47,7 +47,7 @@ router.post('/cadastrar', async (req, res) => {
     }
 });
 
-router.post('cadastrar-aluno', async (req, res) => {
+router.post('/cadastrar-aluno', async (req, res) => {
     const { name, email, password, school, grade, schoolClass } = req.body;
 
     if (!name || !email || !password || !school || !grade || !schoolClass) {
