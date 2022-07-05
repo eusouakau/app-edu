@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/:teacher', async (req, res) => {
+router.get('/all-classes/:teacher', async (req, res) => {
     const teacher = req.params.teacher;
 
     try{
