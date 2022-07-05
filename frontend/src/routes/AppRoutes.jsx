@@ -14,6 +14,7 @@ import Turma from '../pages/turma/turma';
 
 import CadastroAluno from '../pages/cadastro/aluno/cadastro-aluno';
 import CadastroUsuario from '../pages/cadastro/usuario/cadastro-usuario';
+import CadastroTurma from '../pages/cadastro/turma/cadastro-turma';
 
 const AppRoutes = () => {
     const Private =({children}) => {
@@ -39,7 +40,8 @@ const AppRoutes = () => {
             <Route exact path="/home-professor" element={<HomeProfessor/>}/>
 
             <Route exact path="/cadastro" element={<CadastroUsuario/>}/>
-            <Route exact path="/cadastro-aluno" element={<CadastroAluno/>}/>
+            <Route exact path="/turma/:id/cadastro-aluno" element={<CadastroAluno/>}/>
+            <Route exact path="/cadastro-turma" element={<CadastroTurma/>}/>
 
             <Route exact path="/conteudos" element={<Conteudos/>}/>
             <Route exact path="/detalhes-conteudo" element={<DetalhesConteudo/>}/>

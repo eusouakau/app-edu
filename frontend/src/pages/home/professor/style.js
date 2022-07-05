@@ -69,15 +69,15 @@ export const ListStyled = styled.ul`
       background: var(--cinza-claro);
       border-radius: 5px;
     }
+  }
+`;
 
-    p {
-      display: flex;
-      flex-direction: column;
+export const TextStyled = styled.p`
+  display: flex;
+  flex-direction: column;
 
-      span {
-        margin-left: 10px;
-        font-size: 14px;
-      }
-    }
+  span {
+    margin-left: 10px;
+    font-size: 14px;
   }
 `;

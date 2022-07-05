@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ModalCadastro from '../../../components/modals/modal-cadastro/modal-cadastro' 
 import Input from "../../../components/ui/input/input";
-import { cadastrarUsuario } from "../../../services/api";
+import { cadastrarUsuario } from "../../../services/user-service";
 import { ButtonStyled, Container, InputContainer, TitleStyled } from "./style";
 
 const CadastroUsuario = () => {
@@ -26,14 +26,13 @@ const CadastroUsuario = () => {
   }
 
   const toggleModal = async () => {
-    await cadastrar();
     setShowModal(!showModal);
   }
 
   return (
     <Container>
       <TitleStyled>AppEdu Nome Escola</TitleStyled>                  
-      <form onSubmit={toggleModal}>
+      <form onSubmit={() => { cadastrar(); toggleModal()}}>
         <InputContainer>
           <Input
             type="nome"

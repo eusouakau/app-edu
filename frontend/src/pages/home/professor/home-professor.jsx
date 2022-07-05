@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import Header from "../../../components/header/header";
-import { getTurmas } from "../../../services/api";
-import { Container, ListStyled, MenuButtons } from "./style";
+import { AuthContext } from "../../../contexts/auth-context";
+import { getTurmasByProfessor } from "../../../services/turma-service";
+import { Container, ListStyled, MenuButtons, TextStyled } from "./style";
 
 const HomeProfessor = () => {
   const navigate = useNavigate();
   const [listTurmas, setListTurmas] = useState({});
+  const { user } = useContext(AuthContext);
 
   const navigateToTurma = id => {
-    navigate(`/turma/${id}`)
+    navigate(`/turma/${id}`);
+  }
+
+  const navigateToCadastrarTurma = () => {
+    navigate("/cadastro-turma");
   }
 
   useEffect(() => {
-    getTurmas().then(response => {
+    getTurmasByProfessor(user._id).then(response => {
       setListTurmas(response.data);
     });
   }, []);
@@ -22,7 +28,7 @@ const HomeProfessor = () => {
     <Container>
       <Header titulo="Home Professor" />
       <MenuButtons>
-        <button type="button">Cadastrar Turma</button>
+        <button type="button" onClick={navigateToCadastrarTurma}>Cadastrar Turma</button>
         <button type="button">Perguntas Pendentes</button>
         <button type="button">Cadastrar Conteudo</button>
       </MenuButtons>
@@ -31,15 +37,17 @@ const HomeProfessor = () => {
           (
             listTurmas.map( turma => 
               <li onClick={() => navigateToTurma(turma._id)}>
-                  <p>{turma.name}
+                  <TextStyled>{turma.name}
                     <span>{turma.grade} {'->'} {turma.school}</span>
-                  </p>
+                  </TextStyled>
                   <strong>&gt;</strong>
               </li>
-              )
+            )
           ) : 
           (
-            <p>Não existe turmas cadastradas</p>
+            <li style={{cursor: "default"}}>
+              <TextStyled>Não existe turmas cadastradas</TextStyled>
+            </li>
           )
         }
       </ListStyled>

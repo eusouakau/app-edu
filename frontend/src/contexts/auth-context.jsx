@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api, logar } from '../services/api';
+import { api } from '../services/api';
+import { logar } from '../services/user-service';
 
 export const AuthContext = createContext();
 
@@ -23,7 +24,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const response = await logar(email, password);
-    console.log('user', response.data.user);
     const loggedUser = response.data.user;
     const token = response.data.token;
 
@@ -33,7 +33,12 @@ export const AuthProvider = ({ children }) => {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     setUser(loggedUser);
-    navigate("/home-professor");
+    switch(user.role) {
+      case "teacher": navigate("/home-professor"); break;
+      case "student": navigate("/home-estudante"); break;
+      default: navigate("/"); break;
+    }
+    
   };
 
   const logout = () => {

@@ -47,6 +47,8 @@ export const ButtonStyled = styled.button`
 
   height: 30px;
   width: 30px;
+
+  cursor: pointer;
 `;
 
 export const ListStyled = styled.ul`
@@ -63,8 +65,6 @@ export const ListStyled = styled.ul`
   li {
     display: flex;
     flex-direction: column;
-
-    cursor: pointer;
 
     span {
       font-size: 12px;

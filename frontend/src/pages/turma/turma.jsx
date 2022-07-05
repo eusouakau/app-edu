@@ -1,7 +1,8 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useParams } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
 import Header from "../../components/header/header";
-import { getTurmaById } from "../../services/api";
+import { getAlunoById } from "../../services/aluno-service";
+import { getTurmaById } from "../../services/turma-service";
 import { ButtonStyled, Container, ListStyled, MenuButton } from "./style";
 
 const Turma = () => {
@@ -9,14 +10,31 @@ const Turma = () => {
     id,
   } = useParams();
 
+  const navigate = useNavigate();
+
   const [turmaInfo, setTurmaInfo] = useState({});
+  const [listAlunos, setListAlunos] = useState([]);
+
+  const navigateToCadastroAlunos = () => {
+    navigate(`/turma/${id}/cadastro-aluno`);
+  }
 
   useEffect(() => {
     getTurmaById(id).then(response => {
-      console.log(response.data);
       setTurmaInfo(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    turmaInfo.students && turmaInfo.students.map( student => {
+      getAlunoById(student).then(response => {
+        setListAlunos([...listAlunos, response.data]);
+      });
+    });
+  }, [turmaInfo]);
+
+  console.log(turmaInfo)
+  console.log(listAlunos)
 
   return (
     <Container>
@@ -25,19 +43,19 @@ const Turma = () => {
         <ButtonStyled>+</ButtonStyled>
         <p>REGISTRAR CONTEUDO</p>
       </MenuButton>
-      <MenuButton>
+      <MenuButton onClick={navigateToCadastroAlunos}>
         <ButtonStyled>+</ButtonStyled>
         <p>CADASTRAR ALUNO</p>
       </MenuButton>
       <ListStyled>
-        {turmaInfo.students > 0 ? 
+        {listAlunos.length > 0 ? 
           (
-            turmaInfo.students.map( student => {
-              <li>{student.name}</li>
+            listAlunos.map(aluno => {
+              return <li key={aluno._id}>{aluno.name}</li>
             })
-          ) : 
+          ) :
           (
-            <p>Não existe alunos cadastrados</p>
+            <p>Nenhum aluno cadastrado</p>
           )
         }
       </ListStyled>
