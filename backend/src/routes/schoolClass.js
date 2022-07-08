@@ -35,7 +35,7 @@ router.get('/all-classes/:teacher', async (req, res) => {
     const teacher = req.params.teacher;
 
     try{
-        const schoolClasses = await SchoolClass.find({teacher: teacher}).toArray();
+        const schoolClasses = await SchoolClass.find({teacher: teacher});
 
         res.status(200).json(schoolClasses);
         
@@ -76,7 +76,7 @@ router.get('/:name', async (req, res) => {
     }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/update/:id', async (req, res) => {
     const id = req.params.id;
     const { name, students, grade } = req.body;
 

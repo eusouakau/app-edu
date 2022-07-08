@@ -1,11 +1,12 @@
 import React from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/auth-context";
 import { CloseButton, MenuContainer } from "./style";
 
 const Menu = ({onClick}) => {
   const navigate = useNavigate();
-  const { logout } = AuthContext;
+  const { logout } = useContext(AuthContext);
 
   const handleNavigateTo = endereco => {
     navigate(endereco);

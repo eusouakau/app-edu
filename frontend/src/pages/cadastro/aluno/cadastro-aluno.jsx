@@ -4,7 +4,7 @@ import ModalCadastro from '../../../components/modals/modal-cadastro/modal-cadas
 import Header from "../../../components/header/header";
 import Input from "../../../components/ui/input/input";
 import { ButtonStyled, Container, InputContainer } from "./style";
-import { getTurmaById } from "../../../services/turma-service";
+import { getTurmaById, updateAlunos } from "../../../services/turma-service";
 import { cadastrarAluno } from "../../../services/aluno-service";
 
 const CadastroAluno = () => {
@@ -16,37 +16,51 @@ const CadastroAluno = () => {
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const [serie, setSerie] = useState();
-  const [turma, setTurma] = useState();
-  const [escola, setEscola] = useState();
   const [password, setPassword] = useState();
+
+  const [turmaInfo, setTurmaInfo] = useState({});
+  const [listAlunos, setListAlunos] = useState([]);
+  const [aluno, setAluno] = useState();
+
   const [showModal, setShowModal] = useState(false);
 
   const navigateToTurma = () => {
     navigate(`/turma/${id}`);
   };
 
-  const cadastrar = async () => {
-    return await cadastrarAluno(name, email, password, escola, serie, id);
+  const update = async () => {
+    await updateAlunos(turmaInfo._id, turmaInfo.name, listAlunos, turmaInfo.grade);
   };
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
+  const cadastrar = async () => {
+    if(await cadastrarAluno(name, email, password, turmaInfo.school, turmaInfo.grade, turmaInfo._id)) {
+      setAluno(name, email, password, turmaInfo.school, turmaInfo.grade, turmaInfo._id);
+      await update();
+    }
+    toggleModal();
+  };
+
   useEffect(() => {
     getTurmaById(id).then(response => {
-      console.log(response);
-      setSerie(response.data.grade);
-      setEscola(response.data.school);
+      setTurmaInfo(response.data);
     });
-    setTurma(id);
   }, []);
+
+  useEffect(() => {
+    setListAlunos([...listAlunos, aluno]);
+  }, [aluno]);
+
+  console.log("aluno", aluno);
+  console.log("listAlunos", listAlunos);
 
   return (
     <Container>
       <Header titulo="Cadastrar aluno"/>
-        <form onSubmit={() => {cadastrar(); toggleModal()}}>
+        <form onSubmit={() => cadastrar()}>
           <InputContainer>
             <Input
               type="nome"

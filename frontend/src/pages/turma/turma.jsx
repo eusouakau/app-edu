@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import Header from "../../components/header/header";
 import { getAlunoById } from "../../services/aluno-service";
 import { getTurmaById } from "../../services/turma-service";
-import { ButtonStyled, Container, ListStyled, MenuButton } from "./style";
+import { ButtonStyled, ButtonVoltar, Container, ListStyled, MenuButton } from "./style";
 
 const Turma = () => {
   const {
@@ -19,6 +19,10 @@ const Turma = () => {
     navigate(`/turma/${id}/cadastro-aluno`);
   }
 
+  const navigateToHome = () => {
+    navigate("/home-professor");
+  }
+
   useEffect(() => {
     getTurmaById(id).then(response => {
       setTurmaInfo(response.data);
@@ -32,9 +36,6 @@ const Turma = () => {
       });
     });
   }, [turmaInfo]);
-
-  console.log(turmaInfo)
-  console.log(listAlunos)
 
   return (
     <Container>
@@ -59,6 +60,7 @@ const Turma = () => {
           )
         }
       </ListStyled>
+      <ButtonVoltar type="button" onClick={navigateToHome}>Voltar</ButtonVoltar>
     </Container>
   );
 }

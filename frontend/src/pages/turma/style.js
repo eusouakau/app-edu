@@ -76,3 +76,28 @@ export const ListStyled = styled.ul`
     }
   }
 `;
+
+export const ButtonVoltar = styled.button`
+  width: 60%;
+  height: 30px;
+
+  position: fixed;
+  bottom: 20px;
+
+  border-radius: 10px;
+  border: none;
+  background: var(--cinza);
+
+  color: var(--branco);
+  font-weight: 800;
+  font-size: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :hover {
+    background: var(--preto);
+    cursor: pointer;
+  }
+`;
